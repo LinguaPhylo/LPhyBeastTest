@@ -47,17 +47,18 @@ jobs:
         # use absolute path
         run: |
           mkdir $XML_DIR
+          cd $XML_DIR
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS
-          $BEAST_DIR/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST_DIR/bin/lphybeast -o RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
       # 3. run xmls
       - name: Run xmls
-        working-directory: ${{env.XML_DIR}}
         # added -Dbeast.user.package.dir=$GITHUB_WORKSPACE/beast2 into bin/beast
         run: |
+          pwd
           ls .
-          $BEAST_DIR/bin/beast RSV2.xml
+          $BEAST_DIR/bin/beast -working RSV2.xml
           
       # 4. log analyser
       - name: Analyse log
