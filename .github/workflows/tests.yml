@@ -46,6 +46,6 @@ jobs:
           ls $LPHY_SCRIPTS
 
   test-RSV2:
-    uses: ./.github/workflows/reusable-workflow.yml
+    uses: ./.github/workflows/reusable-test.yml
     with:
       filestem: RSV2
