@@ -53,26 +53,24 @@ jobs:
           mkdir $XML_DIR
           cd $XML_DIR
           pwd
-          $BEAST/bin/lphybeast -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast -l 10000000 -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
-      # 3. run xmls
+      # 3. run xmls, WD is still /home/runner/work/LPhyBeastTest/LPhyBeastTest
       - name: Run xmls
         # added -Dbeast.user.package.dir=$GITHUB_WORKSPACE/beast2 into bin/beast
         run: |
           pwd
-          ls .
-          $BEAST/bin/beast -working RSV2.xml
+          echo "ls $XML_DIR"
+          ls $XML_DIR
+          $BEAST/bin/beast -working $XML_DIR/RSV2.xml
           
-      # 4. log analyser
-      - name: Analyse log
-        working-directory: ${{env.XML_DIR}}
+      # 4. post analyses
+      - name: Analyse log and Annotate trees
         run: |
+          cd $XML_DIR
           ls .
           $BEAST/bin/loganalyser RSV2.log
-
-      - name: Annotate tree
-        working-directory: ${{env.XML_DIR}}
-        run: |
           $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+          
           
 
