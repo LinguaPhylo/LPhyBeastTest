@@ -53,7 +53,7 @@ jobs:
           mkdir $XML_DIR
           cd $XML_DIR
           pwd
-          $BEAST/bin/lphybeast -l 10000000 -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
       # 3. run xmls, WD is still /home/runner/work/LPhyBeastTest/LPhyBeastTest
       - name: Run xmls
