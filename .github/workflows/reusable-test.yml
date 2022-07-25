@@ -14,7 +14,7 @@ on:
         type: string
 
 jobs:
-  test-a-tutorial:
+  tutorial:
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +33,7 @@ jobs:
         # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/lphybeast
         # use absolute path
         run: |
-          mkdir $XML_DIR
+          ls -l .
           $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/${{ inputs.filestem }}.xml $LPHY_SCRIPTS/${{ inputs.filestem }}.lphy
 
       # 2. run xmls, WD is still /home/runner/work/LPhyBeastTest/LPhyBeastTest
