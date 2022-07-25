@@ -1,2 +1,2 @@
 # LPhyBeastTest
-LPhyBeast + BEAST2 tests for tutorials
+LPhyBeast + BEAST2 integration tests for tutorials
