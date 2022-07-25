@@ -33,6 +33,7 @@ jobs:
         # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/lphybeast
         # use absolute path
         run: |
+          pwd
           ls -l .
           $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/${{ inputs.filestem }}.xml $LPHY_SCRIPTS/${{ inputs.filestem }}.lphy
 
