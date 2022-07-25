@@ -37,10 +37,11 @@ jobs:
         run: |
           pwd
           ls $BEAST
+          $BEAST/bin/packagemanager -list
           $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add lphybeast
           $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
+          echo "ls $LPHY_BEAST_DIR"
           ls $LPHY_BEAST_DIR
-          $BEAST/bin/packagemanager -list
 
       # 2. create xmls from *.lphy
       - name: Create xmls
@@ -52,7 +53,7 @@ jobs:
 
 
       # 3. run xmls
-      - name: Create xmls
+      - name: Run xmls
         # add -Dbeast.user.package.dir=$GITHUB_WORKSPACE/beast2 into bin/beast
         run: |
           ls $XML_DIR
