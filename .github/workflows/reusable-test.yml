@@ -6,6 +6,12 @@ on:
       filestem:
         required: true
         type: string
+      beastdir:
+        required: true
+        type: string
+      lphydir:
+        required: true
+        type: string
 
 jobs:
   test-a-tutorial:
@@ -14,8 +20,11 @@ jobs:
     steps:
       - name: Set environmental variables
         run: |
-          echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
+          echo "filestem = ${{ inputs.filestem }}"
+          echo "beastdir = ${{ inputs.beastdir }}"
+          echo "lphydir = ${{ inputs.lphydir }}"
+          echo "BEAST=$GITHUB_WORKSPACE/${{ inputs.beastdir }}" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/${{ inputs.beastdir }}/${{ inputs.lphydir }}/tutorials" >> $GITHUB_ENV
           echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
@@ -24,7 +33,6 @@ jobs:
         # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/lphybeast
         # use absolute path
         run: |
-          echo ${{ inputs.filestem }}
           mkdir $XML_DIR
           $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/${{ inputs.filestem }}.xml $LPHY_SCRIPTS/${{ inputs.filestem }}.lphy
 

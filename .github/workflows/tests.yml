@@ -50,3 +50,30 @@ jobs:
     uses: ./.github/workflows/reusable-test.yml
     with:
       filestem: RSV2
+      beastdir: "$BEAST_DIR"
+      lphydir:  "$LPHY_DIR"
+
+  test-hcv:
+    needs: setup-lphybeast
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      filestem: hcv_coal
+      beastdir: "$BEAST_DIR"
+      lphydir: "$LPHY_DIR"
+
+  test-h5n1:
+    needs: setup-lphybeast
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      filestem: h5n1
+      beastdir: "$BEAST_DIR"
+      lphydir: "$LPHY_DIR"
+
+  test-h3n2:
+    needs: setup-lphybeast
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      filestem: h3n2
+      beastdir: "$BEAST_DIR"
+      lphydir: "$LPHY_DIR"
+
