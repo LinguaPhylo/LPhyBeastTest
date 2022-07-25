@@ -1,0 +1,8 @@
+// two population sizes
+Θ ~ LogNormal(meanlog=-3.0, sdlog=1.0, replicates=2);
+// m01 and m10 migration rates backwards in time
+m ~ LogNormal(meanlog=0.0, sdlog=1.0, replicates=2);
+M = migrationMatrix(theta=Θ, m=m);
+ψ ~ StructuredCoalescent(M=M, k=[15,15]);
+C = countMigrations(tree=ψ);
+D ~ PhyloCTMC(L=400, Q=jukesCantor(), tree=ψ);

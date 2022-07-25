@@ -1,0 +1,31 @@
+data {
+  options = {ageDirection="forward", ageRegex=".*\|.*\|(\d*\.\d+|\d+\.\d*)\|.*$"};
+  D = readNexus(file="data/h3n2.nexus", options=options);
+  taxa = D.taxa();
+  L = D.nchar();
+  // take 4th element, where i>=0
+  demes = split(str=D.taxaNames(), regex="\|", i=3);
+  // 3 locations
+  S = length(unique(demes));
+  dim = S*(S-1);
+}
+model {
+  κ ~ LogNormal(meanlog=1.0, sdlog=1.25);
+  π ~ Dirichlet(conc=[2.0,2.0,2.0,2.0]);
+
+  γ ~ LogNormal(meanlog=0.0, sdlog=2.0);
+  r ~ DiscretizeGamma(shape=γ, ncat=4, replicates=L);
+
+  // 0.005 substitutions * site^{-1} * year^{-1} is closer to the truth
+  μ ~ LogNormal(meanlog=-5.298, sdlog=0.25);
+
+  // 3 population sizes
+  Θ ~ LogNormal(meanlog=0.0, sdlog=1.0, replicates=S);
+  // 6 migration rates backwards in time
+  m ~ Exp(mean=1.0, replicates=dim);
+  M = migrationMatrix(theta=Θ, m=m);
+  ψ ~ StructuredCoalescent(M=M, taxa=taxa, demes=demes, sort=true);
+  //rootAge = tree.rootAge();
+
+  D ~ PhyloCTMC(siteRates=r, Q=hky(kappa=κ, freq=π), mu=μ, tree=ψ);
+}
