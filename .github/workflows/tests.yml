@@ -3,19 +3,20 @@ on: [ push, pull_request, workflow_dispatch ]
 
 # not support var in the path
 env:
-  BEAST: beast2.6.7
-  LPHY:  lphy-studio-1.3.0
+  BEAST_DIR: beast2.6.7
+  LPHY_DIR:  lphy-studio-1.3.0
 
 jobs:
   test-lphybeast-tutorials:
     runs-on: ubuntu-latest
 
     # note: not support var containing var
+    # $BEAST is reserved in all scripts
     steps:
       - name: Set environmental variables
         run: |
-          echo "BEAST_DIR=$GITHUB_WORKSPACE/$BEAST" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST/$LPHY/tutorials" >> $GITHUB_ENV
+          echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
           echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
@@ -35,10 +36,10 @@ jobs:
       - name: Install lphybeast
         run: |
           pwd
-          echo "ls $BEAST_DIR"
-          ls $BEAST_DIR
-          $BEAST_DIR/bin/packagemanager -dir $LPHY_BEAST_DIR -add lphybeast
-          $BEAST_DIR/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
+          echo "ls $BEAST"
+          ls $BEAST
+          $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add lphybeast
+          $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
           echo "ls $LPHY_BEAST_DIR"
           ls $LPHY_BEAST_DIR
           echo "ls $LPHY_SCRIPTS"
@@ -52,7 +53,7 @@ jobs:
           mkdir $XML_DIR
           cd $XML_DIR
           pwd
-          $BEAST_DIR/bin/lphybeast -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
       # 3. run xmls
       - name: Run xmls
@@ -60,18 +61,18 @@ jobs:
         run: |
           pwd
           ls .
-          $BEAST_DIR/bin/beast -working RSV2.xml
+          $BEAST/bin/beast -working RSV2.xml
           
       # 4. log analyser
       - name: Analyse log
         working-directory: ${{env.XML_DIR}}
         run: |
           ls .
-          $BEAST_DIR/bin/loganalyser RSV2.log
+          $BEAST/bin/loganalyser RSV2.log
 
       - name: Annotate tree
         working-directory: ${{env.XML_DIR}}
         run: |
-          $BEAST_DIR/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
           
 
