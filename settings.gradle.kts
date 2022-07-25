@@ -3,5 +3,4 @@
 
 rootProject.name = "LPhyBeastTest"
 
-include("beast2")
 include("lphybeast")
