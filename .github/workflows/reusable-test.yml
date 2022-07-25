@@ -6,28 +6,12 @@ on:
       filestem:
         required: true
         type: string
-      beastdir:
-        required: true
-        type: string
-      lphydir:
-        required: true
-        type: string
 
 jobs:
   tutorial:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set environmental variables
-        run: |
-          echo "filestem = ${{ inputs.filestem }}"
-          echo "beastdir = ${{ inputs.beastdir }}"
-          echo "lphydir = ${{ inputs.lphydir }}"
-          echo "BEAST=$GITHUB_WORKSPACE/${{ inputs.beastdir }}" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/${{ inputs.beastdir }}/${{ inputs.lphydir }}/tutorials" >> $GITHUB_ENV
-          echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
-          echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
-
       # 1. create xmls from *.lphy
       - name: Create xmls
         # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/lphybeast

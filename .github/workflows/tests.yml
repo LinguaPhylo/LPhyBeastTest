@@ -46,13 +46,10 @@ jobs:
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
 
-  test-RSV2:
-    needs: setup-lphybeast
-    uses: ./.github/workflows/reusable-test.yml
-    with:
-      filestem: RSV2
-      beastdir: "$BEAST_DIR"
-      lphydir:  "$LPHY_DIR"
+      - name: test-RSV2
+        uses: ./.github/workflows/reusable-test.yml
+        with:
+          filestem: RSV2
 
 #  test-hcv:
 #    needs: setup-lphybeast
