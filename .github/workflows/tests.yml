@@ -51,7 +51,6 @@ jobs:
           ls $LPHY_SCRIPTS
           $BEAST_DIR/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
-
       # 3. run xmls
       - name: Run xmls
         # added -Dbeast.user.package.dir=$GITHUB_WORKSPACE/beast2 into bin/beast
@@ -59,10 +58,14 @@ jobs:
           ls $XML_DIR
           $BEAST_DIR/bin/beast $XML_DIR/RSV2.xml
           
+      # 4. log analyser
+      - name: Analyse log
+        run: |
+          ls $XML_DIR
+          $BEAST_DIR/bin/loganalyser $XML_DIR/RSV2.log
+
+      - name: Annotate tree
+        run: |
+          $BEAST_DIR/bin/treeannotator -burnin 10 -heights mean $XML_DIR/RSV2.trees $XML_DIR/RSV2.tree
           
 
-#      - name: Publish unit test results
-#        uses: EnricoMi/publish-unit-test-result-action@v1
-#        if: always()
-#        with:
-#          files: ./LPhyBeast/*/build/test-results/**/*.xml
