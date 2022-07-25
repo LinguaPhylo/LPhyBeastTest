@@ -53,7 +53,7 @@ jobs:
 
       # 3. run xmls
       - name: Run xmls
-        working-directory: $XML_DIR
+        working-directory: ${{env.XML_DIR}}
         # added -Dbeast.user.package.dir=$GITHUB_WORKSPACE/beast2 into bin/beast
         run: |
           ls .
@@ -61,13 +61,13 @@ jobs:
           
       # 4. log analyser
       - name: Analyse log
-        working-directory: $XML_DIR
+        working-directory: ${{env.XML_DIR}}
         run: |
           ls .
           $BEAST_DIR/bin/loganalyser RSV2.log
 
       - name: Annotate tree
-        working-directory: $XML_DIR
+        working-directory: ${{env.XML_DIR}}
         run: |
           $BEAST_DIR/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
           
