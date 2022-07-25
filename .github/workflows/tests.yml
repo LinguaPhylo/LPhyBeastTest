@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v2
-
       - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
@@ -26,7 +23,8 @@ jobs:
 
       # 1. install lphybeast, lphybeast-ext
       # https://www.beast2.org/managing-packages/
-      - name: Install lphybeast
+      - name: Checkout main & install lphybeast
+        uses: actions/checkout@v3
         run: |
           pwd
           ls $BEAST
