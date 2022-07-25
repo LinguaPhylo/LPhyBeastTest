@@ -46,6 +46,7 @@ jobs:
           ls $LPHY_SCRIPTS
 
   test-RSV2:
+    needs: setup-lphybeast
     uses: ./.github/workflows/reusable-test.yml
     with:
       filestem: RSV2
