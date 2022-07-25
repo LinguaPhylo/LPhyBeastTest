@@ -12,6 +12,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set environmental variables
+        run: |
+          echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
+          echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
+          echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
+
       # 1. create xmls from *.lphy
       - name: Create xmls
         # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/lphybeast
