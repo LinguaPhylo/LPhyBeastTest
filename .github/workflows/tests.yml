@@ -31,15 +31,18 @@ jobs:
 
       # 1. install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
+      # $BEAST_DIR/bin/packagemanager -list
       - name: Install lphybeast
         run: |
           pwd
+          echo "ls $BEAST_DIR"
           ls $BEAST_DIR
-          $BEAST_DIR/bin/packagemanager -list
           $BEAST_DIR/bin/packagemanager -dir $LPHY_BEAST_DIR -add lphybeast
           $BEAST_DIR/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
           echo "ls $LPHY_BEAST_DIR"
           ls $LPHY_BEAST_DIR
+          echo "ls $LPHY_SCRIPTS"
+          ls $LPHY_SCRIPTS
 
       # 2. create xmls from *.lphy
       - name: Create xmls
@@ -48,9 +51,8 @@ jobs:
         run: |
           mkdir $XML_DIR
           cd $XML_DIR
-          echo "ls $LPHY_SCRIPTS"
-          ls $LPHY_SCRIPTS
-          $BEAST_DIR/bin/lphybeast -o RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          pwd
+          $BEAST_DIR/bin/lphybeast -o ./RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
 
       # 3. run xmls
       - name: Run xmls
