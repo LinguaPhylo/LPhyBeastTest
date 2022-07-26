@@ -39,10 +39,10 @@ jobs:
           pwd
           git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
           cd beagle-lib
-          ./autogen.sh 
-          ./configure --prefix=/usr/local 
+          sudo ./autogen.sh 
+          sudo ./configure --prefix=/usr/local 
           sudo make install
-          ldconfig
+          sudo ldconfig
           $BEAST/bin/beast -beagle_info
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
