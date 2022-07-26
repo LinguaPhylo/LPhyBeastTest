@@ -23,15 +23,15 @@ public class H5N1Test {
     @Test
     void assertLog() {
         double mean = logAnalyser.getMean("Theta");
-        assertEquals(7, mean, 0.15, "Theta");
+        assertEquals(7.16, mean, 0.5, "Theta");
 
-        mean = logAnalyser.getMean("mu_trait");
-        assertEquals(8.21, mean, 1.7, "psi.mu_trait ");
+        mean = logAnalyser.getMean("mu_trait"); //ESS 100
+        assertEquals(8.2, mean, 2.0, "psi.mu_trait ");
 
         mean = logAnalyser.getMean("psi.height");
-        assertEquals(10.85, mean, 0.03, "psi.height");
+        assertEquals(10.85, mean, 0.5, "psi.height");
 
         mean = logAnalyser.getMean("D_trait.treeLikelihood");
-        assertEquals(-49.76, mean, 0.5, "D_trait.treeLikelihood");
+        assertEquals(-50, mean, 1.0, "D_trait.treeLikelihood");
     }
 }
