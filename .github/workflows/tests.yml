@@ -29,18 +29,6 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      # use beagle 3.0.1
-#      - name: Build beagle
-#        run: |
-#          pwd
-#          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
-#          cd beagle-lib
-#          sudo ./autogen.sh
-#          sudo ./configure --prefix=/usr/local
-#          sudo make install
-#          sudo ldconfig
-#          $BEAST/bin/beast -beagle_info
-
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
       # $BEAST_DIR/bin/packagemanager -list
@@ -56,6 +44,30 @@ jobs:
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
+
+#      - name: Create and run h5n1 XML
+#        run: |
+#          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+#          cd $XML_DIR
+#          $BEAST/bin/beast -working -beagle_SSE h5n1.xml
+#          ls -l
+#          $BEAST/bin/loganalyser h5n1.log
+#          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
+
+      #TODO more h5n1 post analyses
+
+      #TODO: JRE crashes using beagle for h5n1.xml
+      # use beagle 3.0.1
+#      - name: Build beagle
+#        run: |
+#          pwd
+#          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
+#          cd beagle-lib
+#          sudo ./autogen.sh
+#          sudo ./configure --prefix=/usr/local
+#          sudo make install
+#          sudo ldconfig
+#          $BEAST/bin/beast -beagle_info
 
 #      - name: test RSV2
 #        run: |
@@ -76,17 +88,9 @@ jobs:
 #          $BEAST/bin/loganalyser hcv_coal.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
 
-      - name: Create and run h5n1 XML
-        run: |
-          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
-          cd $XML_DIR
-          $BEAST/bin/beast -working -beagle_SSE h5n1.xml
-          ls -l 
-          $BEAST/bin/loganalyser h5n1.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
 
-      - name: Install libgfortran3
-        run: sudo apt-get install libgfortran3
+      - name: Install libgfortran5
+        run: sudo apt-get install libgfortran5
       - name: Create and run h3n2 XML
         run: |
           $BEAST/bin/lphybeast -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
@@ -95,8 +99,4 @@ jobs:
           ls -l
           $BEAST/bin/loganalyser h3n2.log
           $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
-      
-      
-      
 
-#TODO more h5n1 post analyses
