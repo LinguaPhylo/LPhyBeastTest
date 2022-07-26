@@ -44,7 +44,6 @@ jobs:
           ls $LPHY_BEAST_DIR
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS
-          mkdir $XML_DIR
 
       - name: h5n1
         run: |
