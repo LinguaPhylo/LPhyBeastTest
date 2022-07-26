@@ -91,8 +91,8 @@ jobs:
       # libgfortran5 is not working
       - name: Install libgfortran3
         run: |
-          ls /usr/lib/x86_64-linux-gnu
-          cp $LPHY_BEAST_DIR/lib/libmascot.so /usr/lib/x86_64-linux-gnu
+          ls /usr/lib/x86_64-linux-gnu/lib*
+          sudo cp $LPHY_BEAST_DIR/lib/libmascot.so /usr/lib/x86_64-linux-gnu
       - name: h3n2
         run: |
           $BEAST/bin/lphybeast -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
