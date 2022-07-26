@@ -17,7 +17,7 @@ public class H5N1Test {
 
     @BeforeEach
     void setUp() throws IOException {
-        logAnalyser = new LogAnalyser(TestUtils.LOG_PATH + "h5n1.summary.txt");
+        logAnalyser = new LogAnalyser(TestUtils.LOG_PATH + "h5n1.log");
     }
 
     @Test
