@@ -30,16 +30,16 @@ jobs:
           distribution: 'adopt'
 
       # use beagle 3.0.1
-      - name: Build beagle
-        run: |
-          pwd
-          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
-          cd beagle-lib
-          sudo ./autogen.sh 
-          sudo ./configure --prefix=/usr/local 
-          sudo make install
-          sudo ldconfig
-          $BEAST/bin/beast -beagle_info
+#      - name: Build beagle
+#        run: |
+#          pwd
+#          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
+#          cd beagle-lib
+#          sudo ./autogen.sh
+#          sudo ./configure --prefix=/usr/local
+#          sudo make install
+#          sudo ldconfig
+#          $BEAST/bin/beast -beagle_info
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
@@ -57,45 +57,46 @@ jobs:
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
 
-      - name: Create and run RSV2 XML
-        run: |
-          pwd
-          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
-          ls -l 
-          $BEAST/bin/beast -working -beagle_SSE $XML_DIR/RSV2.xml
-
-      - name: Create and run hcv_coal XML
-        run: |
-          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
-          ls -l 
-          $BEAST/bin/beast -working -beagle_SSE $XML_DIR/hcv_coal.xml
+#      - name: test RSV2
+#        run: |
+#          pwd
+#          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+#          cd $XML_DIR
+#          $BEAST/bin/beast -working -beagle_SSE RSV2.xml
+#          ls -l
+#          $BEAST/bin/loganalyser RSV2.log
+#          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+#
+#      - name: Create and run hcv_coal XML
+#        run: |
+#          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+#          cd $XML_DIR
+#          $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
+#          ls -l
+#          $BEAST/bin/loganalyser hcv_coal.log
+#          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
 
       - name: Create and run h5n1 XML
         run: |
           $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          cd $XML_DIR
+          $BEAST/bin/beast -working -beagle_SSE h5n1.xml
           ls -l 
-          $BEAST/bin/beast -working -beagle_SSE $XML_DIR/h5n1.xml
+          $BEAST/bin/loganalyser h5n1.log
+          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
 
       - name: Install libgfortran3
         run: sudo apt-get install libgfortran3
       - name: Create and run h3n2 XML
         run: |
           $BEAST/bin/lphybeast -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
-          ls -l
-          $BEAST/bin/beast -working -beagle_SSE $XML_DIR/h3n2.xml
-
-      - name: Analyse log and annotate trees
-        run: |
           cd $XML_DIR
-          pwd
+          $BEAST/bin/beast -working -beagle_SSE h3n2.xml
           ls -l
-          $BEAST/bin/loganalyser RSV2.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
-          $BEAST/bin/loganalyser hcv_coal.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
-          $BEAST/bin/loganalyser h5n1.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
           $BEAST/bin/loganalyser h3n2.log
           $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
+      
+      
+      
 
 #TODO more h5n1 post analyses
