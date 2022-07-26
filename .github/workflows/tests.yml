@@ -56,7 +56,9 @@ jobs:
           $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
           grep 'tree' h5n1_with_trait.tree
       - name: h5n1 estimating transitions
+        # require Babel for StateTransitionCounter
         run: |
+          $BEAST_DIR/bin/packagemanager -add Babel
           cd $XML_DIR
           $BEAST/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
           cat h5n1.stc.out
