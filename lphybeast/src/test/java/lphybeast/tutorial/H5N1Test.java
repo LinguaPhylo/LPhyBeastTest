@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,7 +23,18 @@ public class H5N1Test {
 
     @Test
     void assertLog() {
-        double mean = logAnalyser.getMean("Theta");
+        List<String> params = logAnalyser.getLabels();
+        System.out.println("\nParameters = " + params);
+        assertEquals(66, params.size(), "Number of parameters");
+
+        double mean;
+        mean = logAnalyser.getMean("prior");
+        assertEquals(-119, mean, 2.0, "prior");
+
+        mean = logAnalyser.getMean("D.treeLikelihood");
+        assertEquals(-5785.50, mean, 2.0, "D_trait.treeLikelihood");
+
+        mean = logAnalyser.getMean("Theta");
         assertEquals(7.16, mean, 0.5, "Theta");
 
         mean = logAnalyser.getMean("mu_trait"); //ESS 100
