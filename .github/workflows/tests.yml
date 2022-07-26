@@ -54,8 +54,11 @@ jobs:
           $BEAST/bin/loganalyser h5n1.log 
           $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
           grep 'tree' h5n1_with_trait.tree
-
-      #TODO more h5n1 post analyses
+      - name: h5n1 estimating transitions
+        run: |
+          cd $XML_DIR
+          $BEAST/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+          cat h5n1.stc.out
 
       #TODO: JRE crashes using beagle for h5n1.xml
       # use beagle 3.0.1
