@@ -42,7 +42,7 @@ jobs:
           $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
           echo "ls $LPHY_BEAST_DIR"
           ls $LPHY_BEAST_DIR
-          find $LPHY_BEAST_DIR -name "version.xml" | head -1
+          head -1 $(find $LPHY_BEAST_DIR -name 'version.xml' -print)
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS
 
