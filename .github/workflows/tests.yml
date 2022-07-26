@@ -30,6 +30,24 @@ jobs:
           distribution: 'adopt'
           #cache: 'gradle'
 
+      #TODO beagle
+      - name: Checkout beagle
+        uses: actions/checkout@v3
+        with:
+          repository: beagle-dev/beagle-lib
+          ref: v3.0.1
+      - name: Build beagle
+        run: |
+          pwd
+          cd beagle-dev/beagle-lib
+          ls
+          apt-get install -y build-essential autoconf automake libtool pkg-config
+          ./autogen.sh 
+          ./configure --prefix=/usr/local 
+          make install
+          ldconfig
+          $BEAST/bin/beast -beagle_info
+
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
       # $BEAST_DIR/bin/packagemanager -list
@@ -46,29 +64,29 @@ jobs:
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
 
-      - name: create and run RSV2 XML
+      - name: Create and run RSV2 XML
         run: |
           pwd
           ls -l .
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
           $BEAST/bin/beast -working $XML_DIR/RSV2.xml
 
-      - name: create hcv_coal XML
+      - name: Create and run hcv_coal XML
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           $BEAST/bin/beast -working $XML_DIR/hcv_coal.xml
 
-      - name: create h5n1 XML
+      - name: Create and run h5n1 XML
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           $BEAST/bin/beast -working $XML_DIR/h5n1.xml
 
-      - name: create h3n2 XML
+      - name: Create and run h3n2 XML
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
+          $BEAST/bin/lphybeast -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           $BEAST/bin/beast -working $XML_DIR/h3n2.xml
 
-      - name: post analyses
+      - name: Analyse log and annotate trees
         run: |
           cd $XML_DIR
           pwd
@@ -81,3 +99,5 @@ jobs:
           $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
           $BEAST/bin/loganalyser h3n2.log
           $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
+
+#TODO more h5n1 post analyses
