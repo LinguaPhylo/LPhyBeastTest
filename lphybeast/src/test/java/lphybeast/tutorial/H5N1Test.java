@@ -4,10 +4,12 @@ import beast.util.LogAnalyser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Walter Xie
@@ -45,5 +47,28 @@ public class H5N1Test {
 
         mean = logAnalyser.getMean("D_trait.treeLikelihood");
         assertEquals(-50, mean, 1.0, "D_trait.treeLikelihood");
+    }
+
+    @Test
+    void assertTransitions() {
+        File file = new File(TestUtils.LOG_PATH + "h5n1.stc.out");
+        assertTrue(file.exists(), "h5n1.stc.out");
+
+//        BufferedReader reader;
+//        try {
+//            reader = new BufferedReader(new FileReader(file));
+//            String line = reader.readLine();
+//            while (line != null) {
+//                System.out.println(line);
+//                // read next line
+//                line = reader.readLine();
+//            }
+//            reader.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+
     }
 }
