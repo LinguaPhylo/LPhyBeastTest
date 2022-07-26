@@ -30,10 +30,12 @@ jobs:
           distribution: 'adopt'
           #cache: 'gradle'
 
+      - name: Install autoconf automake libtool pkg-config
+        run: |
+          sudo apt-get install -y build-essential autoconf automake libtool pkg-config
       #TODO beagle
       - name: Build beagle
         run: |
-          apt-get install -y build-essential autoconf automake libtool pkg-config
           pwd
           git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
           cd beagle-dev/beagle-lib
