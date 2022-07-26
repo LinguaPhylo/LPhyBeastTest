@@ -46,48 +46,48 @@ jobs:
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
 
-#      - name: h5n1
-#        run: |
-#          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
-#          cd $XML_DIR
-#          $BEAST/bin/beast -working h5n1.xml
-#          ls -l
-#          $BEAST/bin/loganalyser h5n1.log
-#          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
+      - name: h5n1
+        run: |
+          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          cd $XML_DIR
+          $BEAST/bin/beast -working h5n1.xml
+          ls -l
+          $BEAST/bin/loganalyser h5n1.log
+          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
 
       #TODO more h5n1 post analyses
 
       #TODO: JRE crashes using beagle for h5n1.xml
       # use beagle 3.0.1
-#      - name: Build beagle
-#        run: |
-#          pwd
-#          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
-#          cd beagle-lib
-#          sudo ./autogen.sh
-#          sudo ./configure --prefix=/usr/local
-#          sudo make install
-#          sudo ldconfig
-#          $BEAST/bin/beast -beagle_info
+      - name: Build beagle
+        run: |
+          pwd
+          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
+          cd beagle-lib
+          sudo ./autogen.sh
+          sudo ./configure --prefix=/usr/local
+          sudo make install
+          sudo ldconfig
+          $BEAST/bin/beast -beagle_info
 
-#      - name: RSV2
-#        run: |
-#          pwd
-#          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
-#          cd $XML_DIR
-#          $BEAST/bin/beast -working -beagle_SSE RSV2.xml
-#          ls -l
-#          $BEAST/bin/loganalyser RSV2.log
-#          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
-#
-#      - name: hcv_coal
-#        run: |
-#          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
-#          cd $XML_DIR
-#          $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
-#          ls -l
-#          $BEAST/bin/loganalyser hcv_coal.log
-#          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
+      - name: RSV2
+        run: |
+          pwd
+          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          cd $XML_DIR
+          $BEAST/bin/beast -working -beagle_SSE RSV2.xml
+          ls -l
+          $BEAST/bin/loganalyser RSV2.log
+          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+
+      - name: hcv_coal
+        run: |
+          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          cd $XML_DIR
+          $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
+          ls -l
+          $BEAST/bin/loganalyser hcv_coal.log
+          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
 
       # libgfortran5 is not working
       - name: Install libgfortran3
