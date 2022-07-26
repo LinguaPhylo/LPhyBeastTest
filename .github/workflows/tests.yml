@@ -31,17 +31,13 @@ jobs:
           #cache: 'gradle'
 
       #TODO beagle
-      - name: Checkout beagle
-        uses: actions/checkout@v3
-        with:
-          repository: beagle-dev/beagle-lib
-          ref: v3.0.1
       - name: Build beagle
         run: |
+          apt-get install -y build-essential autoconf automake libtool pkg-config
           pwd
+          git clone --branch v3.0.1 --depth=1 https://github.com/beagle-dev/beagle-lib.git
           cd beagle-dev/beagle-lib
           ls
-          apt-get install -y build-essential autoconf automake libtool pkg-config
           ./autogen.sh 
           ./configure --prefix=/usr/local 
           make install
