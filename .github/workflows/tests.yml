@@ -45,11 +45,11 @@ jobs:
           ls $LPHY_SCRIPTS
           mkdir $XML_DIR
 
-#      - name: Create and run h5n1 XML
+#      - name: h5n1
 #        run: |
 #          $BEAST/bin/lphybeast -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
 #          cd $XML_DIR
-#          $BEAST/bin/beast -working -beagle_SSE h5n1.xml
+#          $BEAST/bin/beast -working h5n1.xml
 #          ls -l
 #          $BEAST/bin/loganalyser h5n1.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
@@ -69,7 +69,7 @@ jobs:
 #          sudo ldconfig
 #          $BEAST/bin/beast -beagle_info
 
-#      - name: test RSV2
+#      - name: RSV2
 #        run: |
 #          pwd
 #          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
@@ -79,7 +79,7 @@ jobs:
 #          $BEAST/bin/loganalyser RSV2.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
 #
-#      - name: Create and run hcv_coal XML
+#      - name: hcv_coal
 #        run: |
 #          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
 #          cd $XML_DIR
@@ -88,10 +88,12 @@ jobs:
 #          $BEAST/bin/loganalyser hcv_coal.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
 
-
-      - name: Install libgfortran5
-        run: sudo apt-get install libgfortran5
-      - name: Create and run h3n2 XML
+      # libgfortran5 is not working
+      - name: Install libgfortran3
+        run: |
+          ls /usr/lib/x86_64-linux-gnu
+          cp $LPHY_BEAST_DIR/lib/libmascot.so /usr/lib/x86_64-linux-gnu
+      - name: h3n2
         run: |
           $BEAST/bin/lphybeast -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           cd $XML_DIR
