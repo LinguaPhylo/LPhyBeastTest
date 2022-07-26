@@ -52,8 +52,10 @@ jobs:
           cd $XML_DIR
           $BEAST/bin/beast -working h5n1.xml
           ls -l
-          $BEAST/bin/loganalyser h5n1.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1.trees h5n1.tree
+          $BEAST/bin/loganalyser h5n1.log > h5n1.summary.txt
+          head -10 h5n1.summary.txt
+          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          grep 'tree' h5n1_with_trait.tree
 
       #TODO more h5n1 post analyses
 
@@ -77,8 +79,10 @@ jobs:
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE RSV2.xml
           ls -l
-          $BEAST/bin/loganalyser RSV2.log
+          $BEAST/bin/loganalyser RSV2.log > RSV2.summary.txt
+          head -10 RSV2.summary.txt
           $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+          grep 'tree' RSV2.tree
 
       - name: hcv_coal
         run: |
@@ -86,8 +90,10 @@ jobs:
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
           ls -l
-          $BEAST/bin/loganalyser hcv_coal.log
+          $BEAST/bin/loganalyser hcv_coal.log > hcv_coal.summary.txt
+          head -10 hcv_coal.summary.txt
           $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
+          grep 'tree' hcv_coal.tree
 
       # libgfortran5 is not working
       - name: Install libgfortran3
@@ -98,6 +104,16 @@ jobs:
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE h3n2.xml
           ls -l
-          $BEAST/bin/loganalyser h3n2.log
+          $BEAST/bin/loganalyser h3n2.log > h3n2.summary.txt
+          head -10 h3n2.summary.txt
           $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
+          grep 'tree' h3n2.tree
 
+      # check all *.summary.txt and *.tree
+      - name: Run unit tests
+        run: ./gradlew test --no-daemon
+      - name: Publish unit test results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: ./**/build/test-results/**/*.xml
