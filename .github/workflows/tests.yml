@@ -54,7 +54,7 @@ jobs:
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
           $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
-          grep 'tree' h5n1_with_trait.tree
+
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
         run: |
@@ -85,7 +85,6 @@ jobs:
           ls -l
           $BEAST/bin/loganalyser RSV2.log
           $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
-          grep 'tree' RSV2.tree
 
 #      - name: hcv_coal
 #        run: |
@@ -95,7 +94,6 @@ jobs:
 #          ls -l
 #          $BEAST/bin/loganalyser hcv_coal.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
-#          grep 'tree' hcv_coal.tree
 #
 #      # libgfortran5 is not working
 #      - name: Install libgfortran3
@@ -108,7 +106,6 @@ jobs:
 #          ls -l
 #          $BEAST/bin/loganalyser h3n2.log
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
-#          grep 'tree' h3n2.tree
 
       # check all *.summary.txt and *.tree
       - name: Run log and tree tests
