@@ -83,7 +83,7 @@ public class RSV2Test {
         double mean = logAnalyser.getMean("psi.height");
 
         System.out.println("root height = " + meanRootHeight + ", psi.height mean = " + mean);
-        assertEquals(mean, meanRootHeight, 1.0, "root height");
+        assertEquals(mean, meanRootHeight, 5.0, "root height");
 
         // USALongs56 is child of root
         Node usa56 = null;

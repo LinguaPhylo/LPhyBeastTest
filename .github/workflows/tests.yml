@@ -79,7 +79,7 @@ jobs:
       - name: RSV2
         run: |
           pwd
-          $BEAST/bin/lphybeast -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast -l 2000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE RSV2.xml
           ls -l
