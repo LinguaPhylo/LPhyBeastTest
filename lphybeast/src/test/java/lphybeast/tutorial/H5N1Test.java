@@ -22,7 +22,8 @@ public class H5N1Test {
 
     @BeforeEach
     void setUp() throws IOException {
-        logAnalyser = new LogAnalyser(TestUtils.LOG_PATH + "h5n1.log");
+        // working dir is */LPhyBeastTest/lphybeast
+        logAnalyser = new LogAnalyser("h5n1.log");
     }
 
     @Test
@@ -57,7 +58,7 @@ public class H5N1Test {
 
     @Test
     void assertTransitions() {
-        File file = new File(TestUtils.LOG_PATH + "h5n1.stc.out");
+        File file = new File("h5n1.stc.out");
         assertTrue(file.exists(), "h5n1.stc.out");
 
         boolean startToCount = false;

@@ -3,11 +3,9 @@ package lphybeast.tutorial;
 import beast.evolution.tree.Node;
 import beast.evolution.tree.Tree;
 import beast.util.LogAnalyser;
-import beast.util.NexusParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,6 +20,7 @@ public class RSV2Test {
 
     @BeforeEach
     void setUp() throws IOException {
+        // working dir is */LPhyBeastTest/lphybeast
         logAnalyser = new LogAnalyser("RSV2.log");
     }
 
@@ -62,32 +61,13 @@ public class RSV2Test {
     }
 
     @Test
-    void assertMCCTree() {
-        File file = new File("RSV2.tree");
-        assertTrue(file.exists(), "RSV2.tree");
-
-        NexusParser nexusParser = new NexusParser();
-        try {
-            nexusParser.parseFile(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        List<Tree> parsedTrees = nexusParser.trees;
-        assertEquals(1, parsedTrees.size(), "RSV2 MCC tree");
-
-        Tree mcc = parsedTrees.get(0);
-//        System.out.println("\nRSV2 MCC tree = " + mcc);
-
-        Node root = mcc.getRoot();
-        double meanRootHeight = root.getHeight();
+    void assertMCCTreeAndNode() {
         double mean = logAnalyser.getMean("psi.height");
-
-        System.out.println("root height = " + meanRootHeight + ", psi.height mean = " + mean);
-        assertEquals(mean, meanRootHeight, 5.0, "root height");
+        Tree mccTree = TestUtils.assertMCCTree("RSV2.tree", mean);
 
         // USALongs56 is child of root
         Node usa56 = null;
-        for (Node ch : root.getChildren()) {
+        for (Node ch : mccTree.getRoot().getChildren()) {
             if (ch.isLeaf())
                 usa56 = ch;
         }
@@ -95,6 +75,7 @@ public class RSV2Test {
 
         assertEquals("USALongs56", usa56.getID(), "USALongs56");
     }
+
 
 
 }
