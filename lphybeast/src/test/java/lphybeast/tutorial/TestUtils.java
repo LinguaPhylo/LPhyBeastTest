@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class TestUtils {
 
+    public static final int BURNIN_PERC = 20;
+
     public static Tree assertMCCTree(String tree, double meanTreeHeight) {
         File file = new File(tree);
         assertTrue(file.exists(), tree);

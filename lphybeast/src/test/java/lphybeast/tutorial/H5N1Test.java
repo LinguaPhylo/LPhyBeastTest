@@ -1,6 +1,7 @@
 package lphybeast.tutorial;
 
 import beast.util.LogAnalyser;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,11 +25,11 @@ public class H5N1Test {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("h5n1.log");
+        logAnalyser = new LogAnalyser("h5n1.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
-    void assertLog() {
+    void testLog() {
         List<String> params = logAnalyser.getLabels();
         System.out.println("\nParameters = " + params);
         assertEquals(66, params.size(), "Number of parameters");
@@ -57,7 +59,62 @@ public class H5N1Test {
     }
 
     @Test
-    void assertTransitions() {
+    void testMCCTreeAndNode() {
+        double mean = logAnalyser.getMean("psi.height");
+        //TODO beast.util.TreeParser$TreeParsingException: token recognition error at: '?'
+//        Tree mccTree = TestUtils.assertMCCTree("h5n1_with_trait.tree", mean);
+
+        File treeFile = new File("h5n1_with_trait.tree");
+        assertTrue(treeFile.exists(), "h5n1_with_trait.tree");
+
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(treeFile.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertNotNull(lines, "tree file lines");
+
+        // location.set = {Guangdong,HongKong,Hunan,Guangxi,Fujian,?}
+        // location.set.prob = {0.18878400888395336,0.5857856746252083,...}
+        boolean hasTree = false;
+        for (String line : lines) {
+            // tree TREE1 =
+            if (line.startsWith("tree")) {
+                int lastLeftSquareBracket = line.lastIndexOf("[");
+                int lastRightSquareBracket = line.lastIndexOf("]");
+                assertTrue(lastLeftSquareBracket > 10 && lastRightSquareBracket > lastLeftSquareBracket);
+
+                String rootMetaData = line.substring(lastLeftSquareBracket+1, lastRightSquareBracket);
+                System.out.println(rootMetaData);
+
+                String rootHeight = StringUtils.substringBetween(rootMetaData, "height=", ",");
+                assertNotNull(rootHeight, "height=");
+                double meanRootHeight = Double.parseDouble(rootHeight);
+                System.out.println("root height = " + meanRootHeight + ", psi.height mean = " + mean);
+                assertEquals(mean, meanRootHeight, 5.0, "root height");
+
+                String locationSet = StringUtils.substringBetween(rootMetaData, "location.set={", "},");
+                assertEquals("Guangdong,HongKong,Hunan,Guangxi,Fujian,?", locationSet, "location.set={");
+
+                String locationSetProb = StringUtils.substringBetween(rootMetaData, "location.set.prob={", "},");
+                assertNotNull(locationSetProb, "location.set.prob={");
+                double[] probStr = Arrays.stream(locationSetProb.split(","))
+                        .mapToDouble(Double::parseDouble).toArray();
+                System.out.println("location.set.prob = " + Arrays.toString(probStr));
+                // HongKong prob is the biggest
+                assertEquals(6, probStr.length);
+                assertTrue(probStr[1] > probStr[0] && probStr[1] > probStr[2] && probStr[1] > probStr[3] &&
+                        probStr[1] > probStr[4] &&probStr[1] > probStr[5], "HongKong prob = " + probStr[1]);
+
+                hasTree = true;
+            }
+        }
+        assertTrue(hasTree, "tree TREE1 = ");
+    }
+
+    @Test
+    void testTransitions() {
         File file = new File("h5n1.stc.out");
         assertTrue(file.exists(), "h5n1.stc.out");
 

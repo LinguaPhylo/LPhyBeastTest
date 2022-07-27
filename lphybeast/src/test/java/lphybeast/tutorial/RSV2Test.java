@@ -21,11 +21,11 @@ public class RSV2Test {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("RSV2.log");
+        logAnalyser = new LogAnalyser("RSV2.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
-    void assertLog() {
+    void testLog() {
         List<String> params = logAnalyser.getLabels();
         System.out.println("\nParameters = " + params);
         assertEquals(28, params.size(), "Number of parameters");
@@ -61,7 +61,7 @@ public class RSV2Test {
     }
 
     @Test
-    void assertMCCTreeAndNode() {
+    void testMCCTreeAndNode() {
         double mean = logAnalyser.getMean("psi.height");
         Tree mccTree = TestUtils.assertMCCTree("RSV2.tree", mean);
 
