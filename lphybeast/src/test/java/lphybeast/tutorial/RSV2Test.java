@@ -39,7 +39,7 @@ public class RSV2Test {
         assertEquals(0.32, mean, 0.5, "pi_2.A");
 
         mean = logAnalyser.getMean("kappa.3");
-        assertEquals(-5785.50, mean, 2.0, "D_trait.treeLikelihood");
+        assertEquals(10.68, mean, 1.0, "kappa.3");
 
         mean = logAnalyser.getMean("r_0");
         assertEquals(0.67, mean, 0.5, "r_0");

@@ -86,15 +86,15 @@ jobs:
           $BEAST/bin/loganalyser RSV2.log
           $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
 
-#      - name: hcv_coal
-#        run: |
-#          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
-#          cd $XML_DIR
-#          $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
-#          ls -l
-#          $BEAST/bin/loganalyser hcv_coal.log
-#          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
-#
+      - name: hcv_coal
+        run: |
+          $BEAST/bin/lphybeast -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          cd $XML_DIR
+          $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
+          ls -l
+          $BEAST/bin/loganalyser hcv_coal.log
+          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
+
 #      # libgfortran5 is not working
 #      - name: Install libgfortran3
 #        run: sudo apt-get install libgfortran3
