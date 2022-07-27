@@ -22,7 +22,7 @@ public class RSV2Test {
 
     @BeforeEach
     void setUp() throws IOException {
-        logAnalyser = new LogAnalyser(TestUtils.LOG_PATH + "RSV2.log");
+        logAnalyser = new LogAnalyser("RSV2.log");
     }
 
     @Test
@@ -62,8 +62,8 @@ public class RSV2Test {
     }
 
     @Test
-    void assertTransitions() {
-        File file = new File(TestUtils.LOG_PATH + "RSV2.tree");
+    void assertMCCTree() {
+        File file = new File("RSV2.tree");
         assertTrue(file.exists(), "RSV2.tree");
 
         NexusParser nexusParser = new NexusParser();
@@ -92,6 +92,7 @@ public class RSV2Test {
                 usa56 = ch;
         }
         assertNotNull(usa56, "USALongs56 is child node of root");
+
         assertEquals("USALongs56", usa56.getID(), "USALongs56");
     }
 

@@ -53,14 +53,14 @@ jobs:
           $BEAST/bin/beast -working h5n1.xml
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
-          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          $BEAST/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
 
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
         run: |
           $BEAST_DIR/bin/packagemanager -add Babel
           cd $XML_DIR
-          $BEAST/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+          $BEAST/bin/applauncher StateTransitionCounter -burnin 20 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
           cat h5n1.stc.out
 
       #TODO: JRE crashes using beagle for h5n1.xml
@@ -84,7 +84,7 @@ jobs:
           $BEAST/bin/beast -working -beagle_SSE RSV2.xml
           ls -l
           $BEAST/bin/loganalyser RSV2.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean RSV2.trees RSV2.tree
+          $BEAST/bin/treeannotator -burnin 20 -heights mean RSV2.trees RSV2.tree
 
       - name: hcv_coal
         run: |
@@ -93,7 +93,7 @@ jobs:
           $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
           ls -l
           $BEAST/bin/loganalyser hcv_coal.log
-          $BEAST/bin/treeannotator -burnin 10 -heights mean hcv_coal.trees hcv_coal.tree
+          $BEAST/bin/treeannotator -burnin 20 -heights mean hcv_coal.trees hcv_coal.tree
 
 #      # libgfortran5 is not working
 #      - name: Install libgfortran3
@@ -105,7 +105,7 @@ jobs:
 #          $BEAST/bin/beast -working -beagle_SSE h3n2.xml
 #          ls -l
 #          $BEAST/bin/loganalyser h3n2.log
-#          $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
+#          $BEAST/bin/treeannotator -burnin 20 -heights mean h3n2.trees h3n2.tree
 
       # check all *.summary.txt and *.tree
       - name: Test logs and trees
