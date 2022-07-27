@@ -29,7 +29,7 @@ public class RSV2Test {
     void assertLog() {
         List<String> params = logAnalyser.getLabels();
         System.out.println("\nParameters = " + params);
-        assertEquals(24, params.size(), "Number of parameters");
+        assertEquals(28, params.size(), "Number of parameters");
         assertTrue(params.contains("posterior") && params.contains("likelihood") && params.contains("prior") &&
                 params.contains("pi_0.A") && params.contains("pi_1.G") && params.contains("pi_2.T") &&
                 params.contains("kappa.3") && params.contains("codon_2.treeLikelihood"), "parameters check");

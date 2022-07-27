@@ -108,7 +108,7 @@ jobs:
 #          $BEAST/bin/treeannotator -burnin 10 -heights mean h3n2.trees h3n2.tree
 
       # check all *.summary.txt and *.tree
-      - name: Run log and tree tests
+      - name: Test logs and trees
         run: ./gradlew test --no-daemon
       - name: Publish test results
         uses: EnricoMi/publish-unit-test-result-action@v1
