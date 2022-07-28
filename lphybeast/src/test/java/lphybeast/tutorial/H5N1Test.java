@@ -42,9 +42,6 @@ public class H5N1Test {
         mean = logAnalyser.getMean("prior");
         assertEquals(-119, mean, 10.0, "prior");
 
-        mean = logAnalyser.getMean("D.treeLikelihood");
-        assertEquals(-5785.50, mean, 20.0, "D_trait.treeLikelihood");
-
         mean = logAnalyser.getMean("Theta");
         assertEquals(7.16, mean, 0.5, "Theta");
 
@@ -53,6 +50,9 @@ public class H5N1Test {
 
         mean = logAnalyser.getMean("psi.height");
         assertEquals(10.85, mean, 1.0, "psi.height");
+
+        mean = logAnalyser.getMean("D.treeLikelihood");
+        assertEquals(-5785.50, mean, 20.0, "D_trait.treeLikelihood");
 
         mean = logAnalyser.getMean("D_trait.treeLikelihood");
         assertEquals(-50, mean, 5.0, "D_trait.treeLikelihood");

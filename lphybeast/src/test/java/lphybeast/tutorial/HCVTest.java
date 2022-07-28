@@ -55,8 +55,8 @@ public class HCVTest {
         mean = logAnalyser.getMean("psi.height");
         assertEquals(412, mean, 50.0, "psi.height");
 
-        mean = logAnalyser.getMean("D_trait.treeLikelihood");
-        assertEquals(-6164, mean, 50.0, "D_trait.treeLikelihood");
+        mean = logAnalyser.getMean("D.treeLikelihood");
+        assertEquals(-6164, mean, 50.0, "D.treeLikelihood");
     }
 
     @Test

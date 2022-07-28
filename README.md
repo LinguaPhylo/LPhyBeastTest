@@ -1,25 +1,26 @@
 # LPhyBeastTest
+<a href="./ProjectStructure.png"><img src="ProjectStructure.png" align="right" width=300></a>
 
 Comprehensive integration tests for LPhyBeast + BEAST2 tutorials
 
-## Folder structure
+## Project structure
 
 1. **beast2**
 
-The directory to contain all BEAST2 packages installed at runtime.
+This directory contains all BEAST2 packages installed at runtime, 
+and also the configuration file `beauti.properties` to add the "extra" BEAST2 packages.
 
 2. __beast2.?.?__
 
-The directory to contain installed BEAST2 applications, where the scripts 
-in the subfolder `bin` are modified to use the `beast2` folder as the package directory.
+This directory contains the installed BEAST2 applications, where the scripts 
+in the subfolder `bin` are modified to use the `beast2` directory as the package directory.
 Also see https://www.beast2.org/managing-packages/
 
 3. __lphy-studio-1.?.?__
 
-The directory to contain installed LPhy and LPhy studio.
+This directory is under __beast2.?.?__, containing the installed LPhy and LPhy studio.
 
 4. __lphybeast__
 
-The directory to contain JUnit tests, and also the BEAST 2 XMLs, log files and tree logs at runtime. 
-
+This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tree logs at runtime. 
 
