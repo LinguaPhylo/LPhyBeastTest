@@ -75,6 +75,7 @@ public class H5N1Test {
         }
         assertNotNull(lines, "tree file lines");
 
+        //TODO no "?" in MCC tree anymore
         // location.set = {Guangdong,HongKong,Hunan,Guangxi,Fujian,?}
         // location.set.prob = {0.18878400888395336,0.5857856746252083,...}
         boolean hasTree = false;
@@ -95,17 +96,19 @@ public class H5N1Test {
                 assertEquals(mean, meanRootHeight, 5.0, "root height");
 
                 String locationSet = StringUtils.substringBetween(rootMetaData, "location.set={", "},");
-                assertEquals("Guangdong,HongKong,Hunan,Guangxi,Fujian,?", locationSet, "location.set={");
+                System.out.println("location.set = " + locationSet);
+                assertTrue(locationSet.startsWith("Guangdong,HongKong,Hunan,Guangxi,Fujian"),
+                        "location.set={" + locationSet + "}");
 
                 String locationSetProb = StringUtils.substringBetween(rootMetaData, "location.set.prob={", "},");
                 assertNotNull(locationSetProb, "location.set.prob={");
-                double[] probStr = Arrays.stream(locationSetProb.split(","))
+                double[] probArr = Arrays.stream(locationSetProb.split(","))
                         .mapToDouble(Double::parseDouble).toArray();
-                System.out.println("location.set.prob = " + Arrays.toString(probStr));
+                System.out.println("location.set.prob = " + Arrays.toString(probArr));
                 // HongKong prob is the biggest
-                assertEquals(6, probStr.length);
-                assertTrue(probStr[1] > probStr[0] && probStr[1] > probStr[2] && probStr[1] > probStr[3] &&
-                        probStr[1] > probStr[4] &&probStr[1] > probStr[5], "HongKong prob = " + probStr[1]);
+                assertTrue(probArr.length == 5 || probArr.length == 6, "location.set.prob length");
+                assertTrue(probArr[1] > 0.5 && 0.4 > probArr[0] && 0.4 > probArr[2] &&
+                        0.4 > probArr[3] && 0.4 > probArr[4], "HongKong prob = " + probArr[1]);
 
                 hasTree = true;
             }
