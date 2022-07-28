@@ -48,7 +48,7 @@ jobs:
 
       - name: h5n1
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          $BEAST/bin/lphybeast -l 20000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working h5n1.xml
           ls -l

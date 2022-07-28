@@ -32,7 +32,7 @@ public class H3N2Test {
         assertEquals(23, params.size(), "Number of parameters");
         assertTrue(params.contains("posterior") && params.contains("likelihood") && params.contains("prior") &&
                 params.contains("pi.T") && params.contains("kappa") && params.contains("gamma") && params.contains("mu") &&
-                params.contains("b_m.Hong_Kong_New_York") && params.contains("Theta.New_Zealand") && params.contains("Mascot") &&
+                params.contains("m.Hong_Kong_New_York") && params.contains("Theta.New_Zealand") && params.contains("Mascot") &&
                 params.contains("psi.height") && params.contains("D.treeLikelihood"), "parameters check");
 
         double mean;
@@ -42,14 +42,14 @@ public class H3N2Test {
         mean = logAnalyser.getMean("mu");
         assertEquals(4.037E-3, mean, 1E-3, "clockRate");
 
-        mean = logAnalyser.getMean("b_m.Hong_Kong_New_York");
-        assertEquals(1.2, mean, 0.5, "b_m.Hong_Kong_New_York");
-        mean = logAnalyser.getMean("b_m.New_York_Hong_Kong");
-        assertEquals(1.5, mean, 0.5, "b_m.New_York_Hong_Kong");
-        double mean1 = logAnalyser.getMean("b_m.Hong_Kong_New_Zealand");
-        double mean2 = logAnalyser.getMean("b_m.New_Zealand_Hong_Kong");
-        double mean3 = logAnalyser.getMean("b_m.New_Zealand_New_York");
-        assertTrue(mean1 < 1 && mean2 < 1 && mean3 < 1, "rest of b_m");
+        mean = logAnalyser.getMean("m.Hong_Kong_New_York");
+        assertEquals(1.2, mean, 0.5, "m.Hong_Kong_New_York");
+        mean = logAnalyser.getMean("m.New_York_Hong_Kong");
+        assertEquals(1.5, mean, 0.5, "m.New_York_Hong_Kong");
+        double mean1 = logAnalyser.getMean("m.Hong_Kong_New_Zealand");
+        double mean2 = logAnalyser.getMean("m.New_Zealand_Hong_Kong");
+        double mean3 = logAnalyser.getMean("m.New_Zealand_New_York");
+        assertTrue(mean1 < 1 && mean2 < 1 && mean3 < 1, "rest of m");
 
         mean = logAnalyser.getMean("Theta.Hong_Kong");
         assertEquals(1.43, mean, 0.5, "Theta.Hong_Kong");
@@ -78,7 +78,7 @@ public class H3N2Test {
         assertTrue(root.metaDataString.contains("max=") && root.metaDataString.contains("max.prob="), "root metaDataString");
         assertEquals("Hong_Kong", root.getMetaData("max"), "max=Hong_Kong");
         double prob = Double.parseDouble(root.getMetaData("max.prob").toString());
-        assertTrue(prob > 0.5, "max.prob= " + prob);
+        assertTrue(prob > 0.4, "max.prob=" + prob);
 
         // check leaf nodes meta data
         for (Node leafN : mccTree.getExternalNodes()) {
