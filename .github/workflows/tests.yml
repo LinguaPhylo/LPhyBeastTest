@@ -47,13 +47,14 @@ jobs:
           ls $LPHY_SCRIPTS
 
       - name: h5n1
+        # -l 30,000,000
         run: |
           $BEAST/bin/lphybeast -l 20000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working h5n1.xml
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
-          $BEAST/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          $BEAST/bin/treeannotator -burnin 50 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
 
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
@@ -77,6 +78,7 @@ jobs:
           $BEAST/bin/beast -beagle_info
 
       - name: RSV2
+        # -l 20,000,000
         run: |
           pwd
           $BEAST/bin/lphybeast -l 2000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
@@ -87,8 +89,9 @@ jobs:
           $BEAST/bin/treeannotator -burnin 20 -heights mean RSV2.trees RSV2.tree
 
       - name: hcv_coal
+        # -l 40,000,000
         run: |
-          $BEAST/bin/lphybeast -l 2000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST/bin/lphybeast -l 5000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE hcv_coal.xml
           ls -l
@@ -99,6 +102,7 @@ jobs:
       - name: Install libgfortran3
         run: sudo apt-get install libgfortran3
       - name: h3n2
+        # -l 30,000,000
         run: |
           $BEAST/bin/lphybeast -l 2000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           cd $XML_DIR

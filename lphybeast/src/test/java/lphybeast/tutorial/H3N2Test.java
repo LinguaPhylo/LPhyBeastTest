@@ -64,8 +64,8 @@ public class H3N2Test {
         mean = logAnalyser.getMean("Mascot");
         assertEquals(-38.62, mean, 5.0, "Mascot");
 
-        mean = logAnalyser.getMean("D_trait.treeLikelihood");
-        assertEquals(-1907.5, mean, 10.0, "D_trait.treeLikelihood");
+        mean = logAnalyser.getMean("D.treeLikelihood");
+        assertEquals(-1907.5, mean, 10.0, "D.treeLikelihood");
     }
 
     @Test

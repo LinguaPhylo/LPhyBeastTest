@@ -107,8 +107,12 @@ public class H5N1Test {
                 System.out.println("location.set.prob = " + Arrays.toString(probArr));
                 // HongKong prob is the biggest
                 assertTrue(probArr.length == 5 || probArr.length == 6, "location.set.prob length");
-                assertTrue(probArr[1] > 0.5 && 0.4 > probArr[0] && 0.4 > probArr[2] &&
-                        0.4 > probArr[3] && 0.4 > probArr[4], "HongKong prob = " + probArr[1]);
+                double sum = Arrays.stream(probArr).sum();
+                assertEquals(1, sum, 1E-10, "sum prob");
+                // if ESS low, sometime Pr HongKong < Fujian, which is wrong
+                assertTrue(probArr[1] > 0.4 && 0.2 > probArr[0] && 0.2 > probArr[2] &&
+                        0.2 > probArr[3] && probArr[1] > probArr[4],
+                        "HongKong prob=" + probArr[1] + ", Fujian prob=" + probArr[4]);
 
                 hasTree = true;
             }
