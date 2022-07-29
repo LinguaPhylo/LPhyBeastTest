@@ -96,7 +96,6 @@ public class H5N1Test {
                 assertEquals(mean, meanRootHeight, 5.0, "root height");
 
                 String locationSet = StringUtils.substringBetween(rootMetaData, "location.set={", "},");
-                System.out.println("location.set = " + locationSet);
                 assertTrue(locationSet.startsWith("Guangdong,HongKong,Hunan,Guangxi,Fujian"),
                         "location.set={" + locationSet + "}");
 
@@ -104,12 +103,16 @@ public class H5N1Test {
                 assertNotNull(locationSetProb, "location.set.prob={");
                 double[] probArr = Arrays.stream(locationSetProb.split(","))
                         .mapToDouble(Double::parseDouble).toArray();
+
+                System.out.println("location.set = " + locationSet);
                 System.out.println("location.set.prob = " + Arrays.toString(probArr));
+
                 // HongKong prob is the biggest
                 assertTrue(probArr.length == 5 || probArr.length == 6, "location.set.prob length");
                 double sum = Arrays.stream(probArr).sum();
                 assertEquals(1, sum, 1E-10, "sum prob");
-                // if ESS low, sometime Pr HongKong < Fujian, which is wrong
+
+                // sometime Pr HongKong < Fujian even chain len = 20M, which is wrong
                 assertTrue(probArr[1] > 0.4 && 0.2 > probArr[0] && 0.2 > probArr[2] &&
                         0.2 > probArr[3] && probArr[1] > probArr[4],
                         "HongKong prob=" + probArr[1] + ", Fujian prob=" + probArr[4]);
