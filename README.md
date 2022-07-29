@@ -24,3 +24,18 @@ This directory is under __beast2.?.?__, containing the installed LPhy and LPhy s
 
 This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tree logs at runtime. 
 
+## Run tests
+
+- Update all dependencies, such as lphy, beast2, etc.
+
+
+- Test LPhyBeast or LPhyBeastExt before final release
+  1. update the versions and links in [prerelease.xml](beast2/prerelease.xml).
+  2. set the env variable `TEST` to `true` in [tests.yml](.github/workflows/tests.yml).
+  3. commit and push to trigger the testing workflow.
+
+
+- Test LPhyBeast or LPhyBeastExt after final release
+  1. update the versions and links in [CBAN](https://github.com/CompEvol/CBAN).
+  2. set the env variable `TEST` to `false` in [tests.yml](.github/workflows/tests.yml).
+  3. commit and push to trigger the testing workflow.
