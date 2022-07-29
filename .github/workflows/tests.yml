@@ -85,6 +85,8 @@ jobs:
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
           $BEAST/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          LOC_TREE=$(tail -2 h5n1_with_trait.tree | head -1)
+          echo ${LOC_TREE: -800}
 
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
@@ -108,7 +110,7 @@ jobs:
       - name: hcv_coal
         # -l 40,000,000
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST/bin/lphybeast -l 15000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED hcv_coal.xml
           ls -l
