@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
           echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
-          echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
+          echo "BEAST_PACKAGE_PATH=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
       - name: Checkout main
@@ -38,7 +38,7 @@ jobs:
         run: |
           pwd
           echo $TEST
-          cd $LPHY_BEAST_DIR
+          cd $BEAST_PACKAGE_PATH
           ls -l
           if [ "${TEST,,}" = true ]; then
             echo 'packages.url=prerelease.xml' > beauti.properties
@@ -48,22 +48,21 @@ jobs:
           
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
-      # added -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
+      # define $BEAST_PACKAGE_PATH equivalent to -Dbeast.user.package.dir=$BEAST_PACKAGE_PATH into bin/packagemanager
       # $BEAST_DIR/bin/packagemanager -list
       - name: Install lphybeast
         run: |
           pwd
           echo "ls $BEAST"
           ls $BEAST
-          $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add lphybeast
-          $BEAST/bin/packagemanager -dir $LPHY_BEAST_DIR -add LPhyBeastExt
-          echo "ls $LPHY_BEAST_DIR"
-          ls $LPHY_BEAST_DIR
-          head -1 $(find $LPHY_BEAST_DIR -name 'version.xml' -print)
+          $BEAST/bin/packagemanager -add lphybeast
+          $BEAST/bin/packagemanager -add LPhyBeastExt
+          echo "ls $BEAST_PACKAGE_PATH"
+          ls $BEAST_PACKAGE_PATH
+          head -1 $(find $BEAST_PACKAGE_PATH -name 'version.xml' -print)
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS
 
-      #TODO: JRE crashes using beagle for h5n1.xml
       # use beagle 3.1.2
       - name: Build beagle
         run: |
