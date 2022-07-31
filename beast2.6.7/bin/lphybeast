@@ -58,7 +58,7 @@ fi
 
 LPHY_LIB="$BEAST/lphy-studio-1.3.0/lib"
 echo "Set LPHY_LIB = $LPHY_LIB"
-ARG="-Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Duser.language=en"
+ARG="-Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Duser.language=en -Dbeast.user.package.dir=$BEAST_PACKAGE_PATH"
 LPHY_BEAST="beast.app.tools.AppLauncherLauncher lphybeast"
 if [ -n "$BEAST_EXTRA_LIBS" ]; then
   "$JAVA" $ARG -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*

@@ -32,6 +32,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+          cache: 'gradle'
 
       # if beast2 folder has zip, then use prerelease.xml
       - name: Setup packages.url
