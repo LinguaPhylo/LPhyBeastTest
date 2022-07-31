@@ -55,8 +55,8 @@ jobs:
           pwd
           echo "ls $BEAST"
           ls $BEAST
-          $BEAST/bin/packagemanager -add lphybeast
-          $BEAST/bin/packagemanager -add LPhyBeastExt
+          $BEAST/bin/packagemanager -dir $BEAST_PACKAGE_PATH -add lphybeast
+          $BEAST/bin/packagemanager -dir $BEAST_PACKAGE_PATH -add LPhyBeastExt
           echo "ls $BEAST_PACKAGE_PATH"
           ls $BEAST_PACKAGE_PATH
           head -1 $(find $BEAST_PACKAGE_PATH -name 'version.xml' -print)
