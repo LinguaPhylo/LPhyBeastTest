@@ -31,11 +31,11 @@ This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tr
 
 - Test LPhyBeast or LPhyBeastExt before final release
   1. update the versions and links in [prerelease.xml](beast2/prerelease.xml).
-  2. set the env variable `TEST` to `true` in [tests.yml](.github/workflows/tests.yml).
+  2. set the env variable `PRERELEASE` to `true` in [tests.yml](.github/workflows/tests.yml).
   3. commit and push to trigger the testing workflow.
 
 
 - Test LPhyBeast or LPhyBeastExt after final release
   1. update the versions and links in [CBAN](https://github.com/CompEvol/CBAN).
-  2. set the env variable `TEST` to `false` in [tests.yml](.github/workflows/tests.yml).
+  2. set the env variable `PRERELEASE` to `false` in [tests.yml](.github/workflows/tests.yml).
   3. commit and push to trigger the testing workflow.
