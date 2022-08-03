@@ -80,7 +80,7 @@ jobs:
       - name: h5n1
         # -l 30,000,000
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          $BEAST/bin/lphybeast -l 15000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
           ls -l

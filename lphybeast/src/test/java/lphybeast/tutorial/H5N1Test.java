@@ -112,7 +112,7 @@ public class H5N1Test {
                 double sum = Arrays.stream(probArr).sum();
                 assertEquals(1, sum, 1E-10, "sum prob");
 
-                // sometime Pr HongKong < Fujian even chain len = 20M, which is wrong
+                //TODO sometime Pr HongKong < Fujian even chain len = 20M, which is wrong
                 assertTrue(probArr[1] > 0.4 && 0.2 > probArr[0] && 0.2 > probArr[2] &&
                         0.2 > probArr[3] && probArr[1] > probArr[4],
                         "HongKong prob=" + probArr[1] + ", Fujian prob=" + probArr[4]);
