@@ -78,7 +78,7 @@ jobs:
           $BEAST/bin/beast -beagle_info
 
       - name: h5n1
-        # -l 30,000,000
+        # -l 3,000,000
         run: |
           $BEAST/bin/lphybeast -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
