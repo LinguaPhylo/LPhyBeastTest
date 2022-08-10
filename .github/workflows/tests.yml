@@ -42,7 +42,7 @@ jobs:
           cd $LPHY_BEAST_DIR
           ls -l
           if [ "${PRERELEASE,,}" = true ]; then
-            echo 'packages.url=prerelease.xml' > beauti.properties
+            echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2/prerelease.xml' > beauti.properties
             cat prerelease.xml        
           fi
           cat beauti.properties
