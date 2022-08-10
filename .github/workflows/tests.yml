@@ -43,7 +43,7 @@ jobs:
           ls -l
           if [ "${PRERELEASE,,}" = true ]; then
             echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2/prerelease.xml' > beauti.properties
-            cat prerelease.xml        
+            echo 'Testing SNAPSHOT versions ...'        
           fi
           cat beauti.properties
           
