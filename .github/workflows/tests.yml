@@ -6,7 +6,7 @@ env:
   BEAST_DIR: beast2.6.7
   LPHY_DIR:  lphy-studio-1.3.1
   SEED:      777
-  # true or false
+  # true, then use prerelease.xml for snapshot versions; or false, then use CBAN
   PRERELEASE:      true
 
 jobs:
@@ -85,7 +85,7 @@ jobs:
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
-          $BEAST/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
           LOC_TREE=$(tail -2 h5n1_with_trait.tree | head -1)
           echo ${LOC_TREE: -800}
 
@@ -94,7 +94,7 @@ jobs:
         run: |
           $BEAST_DIR/bin/packagemanager -add Babel
           cd $XML_DIR
-          $BEAST/bin/applauncher StateTransitionCounter -burnin 20 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+          $BEAST/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
           cat h5n1.stc.out
 
       - name: RSV2

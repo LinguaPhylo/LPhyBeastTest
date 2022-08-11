@@ -20,7 +20,7 @@ public class TestUtils {
 
     public static Tree assertMCCTree(String tree, double meanTreeHeight) {
         File file = new File(tree);
-        assertTrue(file.exists(), tree);
+        assertTrue(file.exists(), tree + " file exists");
 
         NexusParser nexusParser = new NexusParser();
         try {
