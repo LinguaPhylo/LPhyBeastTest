@@ -7,7 +7,7 @@ env:
   LPHY_DIR:  lphy-studio-1.3.1
   SEED:      777
   # true, then use prerelease.xml for snapshot versions; or false, then use CBAN
-  PRERELEASE:      true
+  PRERELEASE:      false
 
 jobs:
   setup-lphybeast:
@@ -78,13 +78,15 @@ jobs:
           $BEAST/bin/beast -beagle_info
 
       - name: h5n1
-        # -l 3,000,000
+        # enough ESS: -l 3,000,000
         run: |
           $BEAST/bin/lphybeast -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
           ls -l
           $BEAST/bin/loganalyser h5n1.log 
+          LAST_MCMC_TREE=$(tail -2 h5n1_with_trait.trees | head -1)
+          echo ${LAST_MCMC_TREE: 500}
           $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
           LOC_TREE=$(tail -2 h5n1_with_trait.tree | head -1)
           echo ${LOC_TREE: -800}
@@ -98,7 +100,7 @@ jobs:
           cat h5n1.stc.out
 
       - name: RSV2
-        # -l 20,000,000
+        # enough ESS: -l 20,000,000
         run: |
           pwd
           $BEAST/bin/lphybeast -l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
@@ -109,9 +111,9 @@ jobs:
           $BEAST/bin/treeannotator -burnin 20 -heights mean RSV2.trees RSV2.tree
 
       - name: hcv_coal
-        # -l 40,000,000
+        # enough ESS: -l 40,000,000
         run: |
-          $BEAST/bin/lphybeast -l 15000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED hcv_coal.xml
           ls -l
@@ -122,13 +124,15 @@ jobs:
       - name: Install libgfortran3
         run: sudo apt-get install libgfortran3
       - name: h3n2
-        # -l 30,000,000
+        # enough ESS: -l 30,000,000
         run: |
           $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h3n2.xml
           ls -l
           $BEAST/bin/loganalyser h3n2.log
+          LAST_MCMC_TREE=$(tail -2 h3n2.mascot.trees| head -1)
+          echo ${LAST_MCMC_TREE: 500}
           $BEAST/bin/treeannotator -burnin 20 -heights mean h3n2.mascot.trees h3n2.mascot.tree
 
       # check all *.log and *.tree
