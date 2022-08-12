@@ -46,7 +46,7 @@ public class HCVTest {
         mean = logAnalyser.getMean("Theta.1");
         assertEquals(8200, mean, 500.0, "Theta.1");
         mean = logAnalyser.getMean("Theta.2");
-        assertEquals(2000, mean, 800.0, "Theta.2");
+        assertEquals(1600, mean, 800.0, "Theta.2");
         mean = logAnalyser.getMean("Theta.3");
         assertEquals(400, mean, 200.0, "Theta.3");
         mean = logAnalyser.getMean("Theta.4");
