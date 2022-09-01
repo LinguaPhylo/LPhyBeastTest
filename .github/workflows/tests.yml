@@ -4,7 +4,7 @@ on: [ push, pull_request, workflow_dispatch ]
 # not support var in the path
 env:
   BEAST_DIR: beast2.6.7
-  LPHY_DIR:  lphy-studio-1.3.1
+  LPHY_DIR:  lphy-studio-1.3.2
   SEED:      777
   # true, then use prerelease.xml for snapshot versions; or false, then use CBAN
   PRERELEASE:      false
