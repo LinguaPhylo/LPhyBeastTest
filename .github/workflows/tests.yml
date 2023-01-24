@@ -61,14 +61,6 @@ jobs:
           $BEAST/bin/packagemanager -add LPhyBeastExt
           $BEAST/bin/packagemanager -list
 
-      # https://github.com/CompEvol/beast2/issues/1078
-      - name: Install beast2 base
-        run: |
-          ls $LPHY_BEAST_DIR
-          mkdir $LPHY_BEAST_DIR/BEAST.base
-          cp $BEAST_LIB/BEAST.base.version.xml $LPHY_BEAST_DIR/BEAST.base/version.xml
-          mkdir $LPHY_BEAST_DIR/BEAST.base/lib
-          cp $BEAST_LIB/BEAST-base-*.jar $LPHY_BEAST_DIR/BEAST.base/lib
       - name: Check file paths
         run: |
           echo "ls $LPHY_BEAST_DIR"
