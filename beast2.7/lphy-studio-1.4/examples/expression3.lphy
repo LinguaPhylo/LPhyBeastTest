@@ -1,0 +1,3 @@
+x ~ Exp(mean=1.0);
+y ~ Exp(mean=0.2);
+point = [x,y];

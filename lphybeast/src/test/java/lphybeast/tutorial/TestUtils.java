@@ -1,8 +1,9 @@
 package lphybeast.tutorial;
 
-import beast.evolution.tree.Node;
-import beast.evolution.tree.Tree;
-import beast.util.NexusParser;
+import beast.base.evolution.tree.Tree;
+import beast.base.evolution.tree.Node;
+import beast.base.evolution.tree.Tree;
+import beast.base.parser.NexusParser;
 
 import java.io.File;
 import java.io.IOException;

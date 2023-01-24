@@ -2,7 +2,7 @@ plugins {
     `java-library`
 }
 
-version = "0.0.2"
+version = "0.1.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -12,7 +12,7 @@ java {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("org.apache.commons:commons-lang3:3.12.0")
-    testImplementation(files( "$rootDir/beast2.6.7/lib/beast.jar"))
+    testImplementation(fileTree( "$rootDir/beast2.7/lib"))
 }
 
 tasks.test {

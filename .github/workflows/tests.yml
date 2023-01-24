@@ -3,11 +3,11 @@ on: [ push, pull_request, workflow_dispatch ]
 
 # not support var in the path
 env:
-  BEAST_DIR: beast2.6.7
-  LPHY_DIR:  lphy-studio-1.3.2
+  BEAST_DIR: beast2.7
+  LPHY_DIR:  lphy-studio-1.4
   SEED:      777
   # true, then use prerelease.xml for snapshot versions; or false, then use CBAN
-  PRERELEASE:      false
+  PRERELEASE:      true
 
 jobs:
   setup-lphybeast:
@@ -20,6 +20,7 @@ jobs:
       - name: Set environmental variables
         run: |
           echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
+          echo "BEAST_LIB=$BEAST_DIR/lib" >> $GITHUB_ENV
           echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
           echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
@@ -59,11 +60,22 @@ jobs:
           $BEAST/bin/packagemanager -add lphybeast
           $BEAST/bin/packagemanager -add LPhyBeastExt
           $BEAST/bin/packagemanager -list
+
+      # https://github.com/CompEvol/beast2/issues/1078
+      - name: Install beast2 base
+        run: |
+          ls $LPHY_BEAST_DIR
+          mkdir $LPHY_BEAST_DIR/BEAST.base
+          cp $BEAST_LIB/BEAST.base.version.xml $LPHY_BEAST_DIR/BEAST.base/version.xml
+          mkdir $LPHY_BEAST_DIR/BEAST.base/lib
+          cp $BEAST_LIB/BEAST-base-*.jar $LPHY_BEAST_DIR/BEAST.base/lib
+      - name: Check file paths
+        run: |
           echo "ls $LPHY_BEAST_DIR"
           ls $LPHY_BEAST_DIR
           head -1 $(find $LPHY_BEAST_DIR -name 'version.xml' -print)
           echo "ls $LPHY_SCRIPTS"
-          ls $LPHY_SCRIPTS
+          ls $LPHY_SCRIPTS      
 
       # use beagle 3.1.2
       - name: Build beagle

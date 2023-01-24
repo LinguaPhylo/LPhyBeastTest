@@ -1,0 +1,19 @@
+data {
+  D = readNexus(file="data/hcv.nexus");
+  taxa = D.taxa();
+  L = D.nchar();
+  w = taxa.length()-1;
+}
+model {
+  π ~ Dirichlet(conc=[3.0,3.0,3.0,3.0]);
+  rates ~ Dirichlet(conc=[1.0, 2.0, 1.0, 1.0, 2.0, 1.0]);
+  Q = gtr(freq=π, rates=rates);
+
+  // the mean of the exponential from which the first value of the chain is drawn
+  initialMean ~ LogNormal(meanlog=-3.0, sdlog=1.0);
+  // the changes in Θ coincide with coalescent events n,
+  Θ ~ ExpMarkovChain(initialMean=initialMean, n=w);
+  ψ ~ SkylineCoalescent(taxa=taxa, theta=Θ);
+
+  D ~ PhyloCTMC(L=L, Q=Q, tree=ψ, mu=0.00079);
+}

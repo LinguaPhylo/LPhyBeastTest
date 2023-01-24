@@ -1,8 +1,8 @@
 package lphybeast.tutorial;
 
-import beast.evolution.tree.Node;
-import beast.evolution.tree.Tree;
-import beast.util.LogAnalyser;
+import beast.base.evolution.tree.Node;
+import beast.base.evolution.tree.Tree;
+import beastfx.app.tools.LogAnalyser;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
