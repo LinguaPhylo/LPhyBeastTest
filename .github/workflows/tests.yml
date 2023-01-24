@@ -56,6 +56,8 @@ jobs:
           pwd
           echo "ls $BEAST"
           ls $BEAST
+          ln -sf $BEAST/lib/launcher-2.7.3.jar $BEAST/lib/launcher.jar
+          ls $BEAST/lib
           $BEAST/bin/packagemanager -add lphybeast
           $BEAST/bin/packagemanager -add LPhyBeastExt
           $BEAST/bin/packagemanager -list
