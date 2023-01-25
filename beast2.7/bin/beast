@@ -23,6 +23,7 @@ if [ -z "$BEAST" ]; then
 fi
 
 BEAST_LIB="$BEAST/lib"
+export JAVA_HOME="$BEAST/jre"
 
 if [ -z "$JAVA_HOME" ]; then
   JAVA=java
@@ -30,29 +31,37 @@ else
   JAVA="$JAVA_HOME"/bin/java
 fi
 
+CPU=`uname -m`
 
 # use BEAGLE_LIB if the BEAGLE library is not in a standard location
-if [ -n "$BEAGLE_LIB" ]; then
+if [ $CPU  = 'x86_64' ]; then
+  if [ -n "$BEAGLE_LIB" ]; then
 	if [ -n "$BEAST_EXTRA_LIBS" ]; then
-		BEAST_EXTRA_LIBS="$BEAST_EXTRA_LIBS:$BEAGLE_LIB"
+		BEAST_EXTRA_LIBS="$BEAST_EXTRA_LIBS:$BEAGLE_LIB:$JAVA_HOME/lib/amd64"
 	else
-		BEAST_EXTRA_LIBS="$BEAGLE_LIB"
+		BEAST_EXTRA_LIBS="$BEAGLE_LIB:$JAVA_HOME/lib/amd64"
 	fi
+  fi
 fi
 
 # Explicitly add /usr/local/lib to library search path to ensure 
 # beast continues to find beagle when installed here.  (This is
 # necessary due to known problems with certain JREs.)
-if [ -z "$LD_LIBRARY_PATH" ]; then
-    export LD_LIBRARY_PATH=/usr/local/lib
-else
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH":/usr/local/lib
+if [ $CPU  = 'x86_64' ]; then
+  if [ -z "$LD_LIBRARY_PATH" ]; then
+    export LD_LIBRARY_PATH="/usr/local/lib:$JAVA_HOME/lib/amd64"
+  else
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib:$JAVA_HOME/lib/amd64"
+  fi
 fi
+
 
 # use BEAST_EXTRA_LIBS variable to load BEAGLE and other libraries from non-default locations 
 # this assumes that the library path contains all these libraries (or are set through LD_LIBRARY_PATH)
 if [ -n "$BEAST_EXTRA_LIBS" ]; then 
-  "$JAVA" -Dbeast.user.package.dir=$LPHY_BEAST_DIR -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Djava.library.path="$BEAST_EXTRA_LIBS" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.BeastLauncher $*
-else
-  "$JAVA" -Dbeast.user.package.dir=$LPHY_BEAST_DIR -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.BeastLauncher $*
+	if [ $CPU  = 'x86_64' ]; then
+	  BEAST_EXTRA_LIBS="$JAVA_HOME/lib/amd64"
+	fi
 fi
+
+"$JAVA" -Dbeast.user.package.dir=$LPHY_BEAST_DIR -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Djava.library.path="$LD_LIBRARY_PATH" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.BeastLauncher $*

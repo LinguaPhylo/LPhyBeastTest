@@ -1,8 +1,5 @@
 #!/bin/sh
 
-### copy this to $BEAST/bin
-### check if lphy-?.?.?.jar and extension jars are available in $BEAST/lphy/lib
-
 if [ -z "$BEAST" ]; then
 	## resolve links - $0 may be a link to application
 	PRG="$0"
@@ -26,6 +23,7 @@ if [ -z "$BEAST" ]; then
 fi
 
 BEAST_LIB="$BEAST/lib"
+export JAVA_HOME="$BEAST/jre"
 
 if [ -z "$JAVA_HOME" ]; then
   JAVA=java
@@ -42,8 +40,6 @@ if [ -n "$BEAGLE_LIB" ]; then
 		BEAST_EXTRA_LIBS="$BEAGLE_LIB"
 	fi
 fi
-# use BEAST_EXTRA_LIBS variable to load BEAGLE and other libraries from non-default locations
-# this assumes that the library path contains all these libraries (or are set through LD_LIBRARY_PATH)
 
 # Explicitly add /usr/local/lib to library search path to ensure 
 # beast continues to find beagle when installed here.  (This is
