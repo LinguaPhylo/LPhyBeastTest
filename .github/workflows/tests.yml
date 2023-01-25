@@ -31,7 +31,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'zulu'
           cache: 'gradle'
 
       # if beast2 folder has zip, then use prerelease.xml
