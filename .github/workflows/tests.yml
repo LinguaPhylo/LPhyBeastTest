@@ -54,10 +54,11 @@ jobs:
       # /home/runner/.beast/2.7
       - name: Install packages
         run: |
+          echo "PackageManager='java -Djava.library.path=$BEAST_LIB -cp $BEAST_LIB/$LAUNCHER beast.pkgmgmt.PackageManager'" >> $GITHUB_ENV
           java -version
           ls $BEAST_LIB
-          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add lphybeast
-          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add LPhyBeastExt
+          $PackageManager -add lphybeast
+          $PackageManager -add LPhyBeastExt
       # https://github.com/CompEvol/beast2/issues/1078
       - name: Install beast2 base
         run: |
@@ -69,9 +70,10 @@ jobs:
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
+      # TODO why $BEAST/bin/packagemanager not working
       - name: Validate lphybeast
         run: |
-          $BEAST/bin/packagemanager -list
+          $PackageManager -list
           $BEAST/bin/applauncher lphybeast -V
           $BEAST/bin/lphybeast-mod -V
 
