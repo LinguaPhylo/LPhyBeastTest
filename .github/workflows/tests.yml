@@ -19,9 +19,10 @@ jobs:
     steps:
       - name: Set environmental variables
         run: |
-          echo "BEAST2_BIN=$GITHUB_WORKSPACE/beast2.7/bin" >> $GITHUB_ENV
-          echo "BEAST2_LIB=$GITHUB_WORKSPACE/beast2.7/lib" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST2_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
+          echo "BEAST2_DIR=$GITHUB_WORKSPACE/beast2.7" >> $GITHUB_ENV
+          echo "BEAST2_BIN=$BEAST2_DIR/bin" >> $GITHUB_ENV
+          echo "BEAST2_LIB=$BEAST2_DIR/lib" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST2_DIR/lphy-studio-1.4/tutorials" >> $GITHUB_ENV
           echo "REPO_DIR=/home/runner/.beast/2.7" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
@@ -68,11 +69,10 @@ jobs:
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
-      # TODO why $BEAST2_BIN/packagemanager not working
+      # $BEAST2_BIN/applauncher lphybeast -V
       - name: Validate lphybeast
         run: |
           $BEAST2_BIN/packagemanager -list
-          $BEAST2_BIN/applauncher lphybeast -V
           $BEAST2_BIN/lphybeast-mod -V
 
       - name: Check required files
