@@ -36,14 +36,26 @@ jobs:
           distribution: 'zulu'
           java-package: 'jre+fx'
 
+      # PRERELEASE: true, then use prerelease.xml
+      - name: Setup packages.url
+        run: |
+          mkdir /home/runner/.beast
+          mkdir $REPO_DIR
+          echo "PRERELEASE = $PRERELEASE"
+          pwd
+          cd $BEAST_LIB
+          if [ "${PRERELEASE,,}" = true ]; then
+            echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2.7/lib/prerelease.xml' > beauti.properties
+            echo 'Testing SNAPSHOT versions ...'        
+          fi
+          cat beauti.properties
+          cp beauti.properties $REPO_DIR
 
       # /home/runner/.beast/2.7
       - name: Install packages
         run: |
           java -version
           ls $BEAST_LIB
-          mkdir /home/runner/.beast
-          mkdir $REPO_DIR
           java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add lphybeast
           java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add LPhyBeastExt
       # https://github.com/CompEvol/beast2/issues/1078
@@ -54,18 +66,6 @@ jobs:
           cp $BEAST_LIB/packages/BEAST.base.version.xml $REPO_DIR/BEAST.base/version.xml
           mkdir $REPO_DIR/BEAST.base/lib
           cp $BEAST_LIB/packages/BEAST-base-*.jar $REPO_DIR/BEAST.base/lib
-      # PRERELEASE: true, then use prerelease.xml
-      - name: Setup packages.url
-        run: |
-          echo "PRERELEASE = $PRERELEASE"
-          pwd
-          cd $BEAST_LIB
-          if [ "${PRERELEASE,,}" = true ]; then
-            echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2.7/lib/prerelease.xml' > beauti.properties
-            echo 'Testing SNAPSHOT versions ...'        
-          fi
-          cat beauti.properties
-          cp beauti.properties $REPO_DIR
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
