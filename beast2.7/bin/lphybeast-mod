@@ -52,7 +52,7 @@ echo $(ls "$BEAST_LIB")
 LPHY_LIB="$BEAST/lphy-studio-1.4/lib"
 echo "Set LPHY_LIB = $LPHY_LIB"
 echo $(ls "$LPHY_LIB")
-ARG="-Dlauncher.wait.for.exit=true -Xms256m -Xmx60g -Duser.language=en -Dpicocli.disable.closures=true"
+ARG="-Dbeast.user.package.dir=$LPHY_BEAST_DIR  -Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx60g -Duser.language=en"
 LPHY_BEAST="beast.pkgmgmt.launcher.AppLauncherLauncher lphybeast"
 if [ -n "$BEAST_EXTRA_LIBS" ]; then
   "$JAVA" "$ARG" -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" "$LPHY_BEAST" $*
