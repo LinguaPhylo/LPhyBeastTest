@@ -52,12 +52,11 @@ jobs:
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
       # $BEAST/bin/packagemanager -list
+      #ln -sf $BEAST/lib/launcher-2.7.3.jar $BEAST/lib/launcher.jar
       - name: Install lphybeast
         run: |
           pwd
-          echo "ls $BEAST"
           ls $BEAST
-          ln -sf $BEAST/lib/launcher-2.7.3.jar $BEAST/lib/launcher.jar
           ls $BEAST/lib
           $BEAST/bin/packagemanager -add lphybeast
           $BEAST/bin/packagemanager -add LPhyBeastExt
