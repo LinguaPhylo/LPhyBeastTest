@@ -86,7 +86,7 @@ jobs:
       - name: h5n1
         # enough ESS: -l 3,000,000
         run: |
-          $BEAST/bin/lphybeast -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          $BEAST/bin/lphybeast-mod -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
           ls -l
@@ -109,7 +109,7 @@ jobs:
         # enough ESS: -l 20,000,000
         run: |
           pwd
-          $BEAST/bin/lphybeast -l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST/bin/lphybeast-mod -l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED RSV2.xml
           ls -l
@@ -119,7 +119,7 @@ jobs:
       - name: hcv_coal
         # enough ESS: -l 40,000,000
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST/bin/lphybeast-mod -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED hcv_coal.xml
           ls -l
@@ -132,7 +132,7 @@ jobs:
       - name: h3n2
         # enough ESS: -l 30,000,000
         run: |
-          $BEAST/bin/lphybeast -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
+          $BEAST/bin/lphybeast-mod -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           cd $XML_DIR
           $BEAST/bin/beast -working -beagle_SSE -seed $SEED h3n2.xml
           ls -l
