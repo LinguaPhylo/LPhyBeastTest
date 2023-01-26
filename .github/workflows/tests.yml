@@ -65,7 +65,7 @@ jobs:
           mkdir $REPO_DIR/BEAST.base
           cp $BEAST_LIB/packages/BEAST.base.version.xml $REPO_DIR/BEAST.base/version.xml
           mkdir $REPO_DIR/BEAST.base/lib
-          cp $BEAST_LIB/packages/BEAST-base-*.jar $REPO_DIR/BEAST.base/lib
+          cp $BEAST_LIB/packages/BEAST.base.*.jar $REPO_DIR/BEAST.base/lib
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
