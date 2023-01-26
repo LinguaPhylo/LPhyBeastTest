@@ -22,7 +22,7 @@ jobs:
           echo "BEAST2_DIR=$GITHUB_WORKSPACE/beast2.7" >> $GITHUB_ENV
           echo "BEAST2_BIN=$BEAST2_DIR/bin" >> $GITHUB_ENV
           echo "BEAST2_LIB=$BEAST2_DIR/lib" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST2_DIR/lphy-studio-1.4/tutorials" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$BEAST2_DIR/lphy-studio-1.4/tutorials" >> $GITHUB_ENV
           echo "REPO_DIR=/home/runner/.beast/2.7" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
@@ -113,10 +113,10 @@ jobs:
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
         run: |
-#          $BEAST2_DIR/bin/packagemanager -add Babel
-#          cd $XML_DIR
-#          $BEAST2_BIN/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
-#          cat h5n1.stc.out
+          $BEAST2_BIN/packagemanager -add Babel
+          cd $XML_DIR
+          $BEAST2_BIN/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+          cat h5n1.stc.out
 
       - name: RSV2
         # enough ESS: -l 20,000,000
