@@ -19,9 +19,9 @@ jobs:
     steps:
       - name: Set environmental variables
         run: |
-          echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
-          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
-          echo "BEAST_LIB=$GITHUB_WORKSPACE/beast2.7/lib" >> $GITHUB_ENV
+          echo "BEAST2=$GITHUB_WORKSPACE/$BEAST2_DIR" >> $GITHUB_ENV
+          echo "BEAST2_LIB=$GITHUB_WORKSPACE/beast2.7/lib" >> $GITHUB_ENV
+          echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST2_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
           echo "LAUNCHER=launcher-2.7.3.jar" >> $GITHUB_ENV
           echo "REPO_DIR=/home/runner/.beast/2.7" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
@@ -43,7 +43,7 @@ jobs:
           mkdir $REPO_DIR
           echo "PRERELEASE = $PRERELEASE"
           pwd
-          cd $BEAST_LIB
+          cd $BEAST2_LIB
           if [ "${PRERELEASE,,}" = true ]; then
             echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2.7/lib/prerelease.xml' > beauti.properties
             echo 'Testing SNAPSHOT versions ...'        
@@ -55,26 +55,26 @@ jobs:
       - name: Install packages
         run: |
           java -version
-          ls $BEAST_LIB
-          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add lphybeast
-          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add LPhyBeastExt
+          ls $BEAST2_LIB
+          $BEAST2/bin/packagemanager -add lphybeast
+          $BEAST2/bin/packagemanager -add LPhyBeastExt
       # https://github.com/CompEvol/beast2/issues/1078
       - name: Install beast2 base
         run: |
           ls $REPO_DIR
           mkdir $REPO_DIR/BEAST.base
-          cp $BEAST_LIB/packages/BEAST.base.version.xml $REPO_DIR/BEAST.base/version.xml
+          cp $BEAST2_LIB/packages/BEAST.base.version.xml $REPO_DIR/BEAST.base/version.xml
           mkdir $REPO_DIR/BEAST.base/lib
-          cp $BEAST_LIB/packages/BEAST.base.*.jar $REPO_DIR/BEAST.base/lib
+          cp $BEAST2_LIB/packages/BEAST.base.*.jar $REPO_DIR/BEAST.base/lib
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
       # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
-      # TODO why $BEAST/bin/packagemanager not working
+      # TODO why $BEAST2/bin/packagemanager not working
       - name: Validate lphybeast
         run: |
-          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -list
-          $BEAST/bin/applauncher lphybeast -V
-          $BEAST/bin/lphybeast-mod -V
+          $BEAST2/bin/packagemanager -list
+          $BEAST2/bin/applauncher lphybeast -V
+          $BEAST2/bin/lphybeast-mod -V
 
       - name: Check required files
         run: |
@@ -95,50 +95,50 @@ jobs:
           sudo ./configure --prefix=/usr/local
           sudo make install
           sudo ldconfig
-          $BEAST/bin/beast -beagle_info
+          $BEAST2/bin/beast -beagle_info
 
       - name: h5n1
         # enough ESS: -l 3,000,000
         run: |
-          $BEAST/bin/lphybeast-mod -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
+          $BEAST2/bin/lphybeast-mod -l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy
           cd $XML_DIR
-          $BEAST/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
+          $BEAST2/bin/beast -working -beagle_SSE -seed $SEED h5n1.xml
           ls -l
-          $BEAST/bin/loganalyser h5n1.log 
+          $BEAST2/bin/loganalyser h5n1.log 
           LAST_MCMC_TREE=$(tail -2 h5n1_with_trait.trees | head -1)
           echo ${LAST_MCMC_TREE: 500}
-          $BEAST/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+          $BEAST2/bin/treeannotator -burnin 10 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
           LOC_TREE=$(tail -2 h5n1_with_trait.tree | head -1)
           echo ${LOC_TREE: -800}
 
       - name: h5n1 estimating transitions
         # require Babel for StateTransitionCounter
         run: |
-#          $BEAST_DIR/bin/packagemanager -add Babel
+#          $BEAST2_DIR/bin/packagemanager -add Babel
 #          cd $XML_DIR
-#          $BEAST/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+#          $BEAST2/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
 #          cat h5n1.stc.out
 
       - name: RSV2
         # enough ESS: -l 20,000,000
         run: |
           pwd
-          $BEAST/bin/lphybeast-mod -l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
+          $BEAST2/bin/lphybeast-mod -l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy
           cd $XML_DIR
-          $BEAST/bin/beast -working -beagle_SSE -seed $SEED RSV2.xml
+          $BEAST2/bin/beast -working -beagle_SSE -seed $SEED RSV2.xml
           ls -l
-          $BEAST/bin/loganalyser RSV2.log
-          $BEAST/bin/treeannotator -burnin 20 -heights mean RSV2.trees RSV2.tree
+          $BEAST2/bin/loganalyser RSV2.log
+          $BEAST2/bin/treeannotator -burnin 20 -heights mean RSV2.trees RSV2.tree
 
       - name: hcv_coal
         # enough ESS: -l 40,000,000
         run: |
-          $BEAST/bin/lphybeast-mod -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
+          $BEAST2/bin/lphybeast-mod -l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy
           cd $XML_DIR
-          $BEAST/bin/beast -working -beagle_SSE -seed $SEED hcv_coal.xml
+          $BEAST2/bin/beast -working -beagle_SSE -seed $SEED hcv_coal.xml
           ls -l
-          $BEAST/bin/loganalyser hcv_coal.log
-          $BEAST/bin/treeannotator -burnin 20 -heights mean hcv_coal.trees hcv_coal.tree
+          $BEAST2/bin/loganalyser hcv_coal.log
+          $BEAST2/bin/treeannotator -burnin 20 -heights mean hcv_coal.trees hcv_coal.tree
 
       # libgfortran5 is not working
       - name: Install libgfortran3
@@ -146,14 +146,14 @@ jobs:
       - name: h3n2
         # enough ESS: -l 30,000,000
         run: |
-          $BEAST/bin/lphybeast-mod -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
+          $BEAST2/bin/lphybeast-mod -l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy
           cd $XML_DIR
-          $BEAST/bin/beast -working -beagle_SSE -seed $SEED h3n2.xml
+          $BEAST2/bin/beast -working -beagle_SSE -seed $SEED h3n2.xml
           ls -l
-          $BEAST/bin/loganalyser h3n2.log
+          $BEAST2/bin/loganalyser h3n2.log
           LAST_MCMC_TREE=$(tail -2 h3n2.mascot.trees| head -1)
           echo ${LAST_MCMC_TREE: 500}
-          $BEAST/bin/treeannotator -burnin 20 -heights mean h3n2.mascot.trees h3n2.mascot.tree
+          $BEAST2/bin/treeannotator -burnin 20 -heights mean h3n2.mascot.trees h3n2.mascot.tree
 
       # check all *.log and *.tree
       - name: Test logs and trees
