@@ -30,7 +30,7 @@ This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tr
 
 
 - Test LPhyBeast or LPhyBeastExt before final release
-  1. update the versions and links in [prerelease.xml](beast2/prerelease.xml).
+  1. update the versions and links in [prerelease.xml](beast2.7/lib/prerelease.xml).
   2. set the env variable `PRERELEASE` to `true` in [tests.yml](.github/workflows/tests.yml).
   3. commit and push to trigger the testing workflow.
 

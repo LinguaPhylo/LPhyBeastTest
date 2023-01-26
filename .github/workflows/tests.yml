@@ -21,7 +21,9 @@ jobs:
         run: |
           echo "BEAST=$GITHUB_WORKSPACE/$BEAST_DIR" >> $GITHUB_ENV
           echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
-          echo "LPHY_BEAST_DIR=$GITHUB_WORKSPACE/beast2" >> $GITHUB_ENV
+          echo "BEAST_LIB=$GITHUB_WORKSPACE/beast2.7/lib" >> $GITHUB_ENV
+          echo "LAUNCHER=launcher-2.7.3.jar" >> $GITHUB_ENV
+          echo "REPO_DIR=/home/runner/.beast/2.7" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
       - name: Checkout main
@@ -32,45 +34,53 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
-          java-package: 'jdk+fx'
+          java-package: 'jre+fx'
 
-      # if beast2 folder has zip, then use prerelease.xml
-      - name: Setup packages.url
+
+      # /home/runner/.beast/2.7
+      - name: Install packages
         run: |
           java -version
+          ls $BEAST_LIB
+          mkdir /home/runner/.beast
+          mkdir $REPO_DIR
+          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add lphybeast
+          java -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/$LAUNCHER" beast.pkgmgmt.PackageManager -add LPhyBeastExt
+      # https://github.com/CompEvol/beast2/issues/1078
+      - name: Install beast2 base
+        run: |
+          ls $REPO_DIR
+          mkdir $REPO_DIR/BEAST.base
+          cp $BEAST_LIB/packages/BEAST.base.version.xml $REPO_DIR/BEAST.base/version.xml
+          mkdir $REPO_DIR/BEAST.base/lib
+          cp $BEAST_LIB/packages/BEAST-base-*.jar $REPO_DIR/BEAST.base/lib
+      # PRERELEASE: true, then use prerelease.xml
+      - name: Setup packages.url
+        run: |
+          echo "PRERELEASE = $PRERELEASE"
           pwd
-          echo $PRERELEASE
-          cd $LPHY_BEAST_DIR
-          ls -l
+          cd $BEAST_LIB
           if [ "${PRERELEASE,,}" = true ]; then
-            echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2/prerelease.xml' > beauti.properties
+            echo 'packages.url=https://github.com/LinguaPhylo/LPhyBeastTest/raw/main/beast2.7/lib/prerelease.xml' > beauti.properties
             echo 'Testing SNAPSHOT versions ...'        
           fi
           cat beauti.properties
-          
+          cp beauti.properties $REPO_DIR
 
       # install lphybeast, lphybeast-ext https://www.beast2.org/managing-packages/
-      # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager
-      # $BEAST/bin/packagemanager -list
-      #ln -sf $BEAST/lib/launcher-2.7.3.jar $BEAST/lib/launcher.jar
-      - name: Install lphybeast
-        run: |
-          pwd
-          ls $BEAST
-          ls $BEAST/lib
-          $BEAST/bin/packagemanager -add lphybeast
-          $BEAST/bin/packagemanager -add LPhyBeastExt
-          $BEAST/bin/packagemanager -list
+      # add -Dbeast.user.package.dir=$LPHY_BEAST_DIR into bin/packagemanager to use diff $REPO_DIR
       - name: Validate lphybeast
         run: |
+          $BEAST/bin/packagemanager -list
           $BEAST/bin/applauncher lphybeast -V
           $BEAST/bin/lphybeast-mod -V
 
-      - name: Check file paths
+      - name: Check required files
         run: |
-          echo "ls $LPHY_BEAST_DIR"
-          ls $LPHY_BEAST_DIR
-          head -1 $(find $LPHY_BEAST_DIR -name 'version.xml' -print)
+          pwd
+          echo "ls $REPO_DIR"
+          ls $REPO_DIR
+          head -1 $(find $REPO_DIR -name 'version.xml' -print)
           echo "ls $LPHY_SCRIPTS"
           ls $LPHY_SCRIPTS      
 

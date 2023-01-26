@@ -55,7 +55,7 @@ echo $(ls "$LPHY_LIB")
 ARG="-Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx60g -Duser.language=en"
 LPHY_BEAST="beast.pkgmgmt.launcher.AppLauncherLauncher lphybeast"
 if [ -n "$BEAST_EXTRA_LIBS" ]; then
-  "$JAVA" $ARG -Dbeast.user.package.dir="$LPHY_BEAST_DI"R -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
+  "$JAVA" $ARG -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
 else
-  "$JAVA" $ARG -Dbeast.user.package.dir="$LPHY_BEAST_DIR" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
+  "$JAVA" $ARG -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
 fi
