@@ -47,7 +47,7 @@ fi
 "$JAVA" -version
 echo $(ls "$BEAST_LIB")
 
-LPHY_LIB="$BEAST/lphy-studio-1.4.0/lib"
+LPHY_LIB="$BEAST/lphy-studio-1.4/lib"
 echo "Set LPHY_LIB = $LPHY_LIB"
 echo $(ls "$LPHY_LIB")
 # must set -Dpicocli.disable.closures=true using picocli:4.7.0
