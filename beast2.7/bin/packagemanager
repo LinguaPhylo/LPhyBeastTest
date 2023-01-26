@@ -24,5 +24,6 @@ fi
 
 BEAST_LIB="$BEAST/lib"
 JAVA="java"
+echo $BEAST_LIB
 "$JAVA" -Xms256m -Xmx8g -Djava.library.path="$BEAST_LIB" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.PackageManager $*
 

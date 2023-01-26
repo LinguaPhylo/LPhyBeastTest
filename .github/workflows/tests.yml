@@ -22,7 +22,6 @@ jobs:
           echo "BEAST2_BIN=$GITHUB_WORKSPACE/beast2.7/bin" >> $GITHUB_ENV
           echo "BEAST2_LIB=$GITHUB_WORKSPACE/beast2.7/lib" >> $GITHUB_ENV
           echo "LPHY_SCRIPTS=$GITHUB_WORKSPACE/$BEAST2_DIR/$LPHY_DIR/tutorials" >> $GITHUB_ENV
-          echo "LAUNCHER=launcher-2.7.3.jar" >> $GITHUB_ENV
           echo "REPO_DIR=/home/runner/.beast/2.7" >> $GITHUB_ENV
           echo "XML_DIR=$GITHUB_WORKSPACE/lphybeast" >> $GITHUB_ENV
 
