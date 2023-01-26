@@ -47,15 +47,15 @@ fi
 "$JAVA" -version
 echo $(ls "$BEAST_LIB")
 
-#TODO: LPHY_DIR=$(find "$BEAST" -maxdepth 1 -type d -name 'lphy-studio-1.*' | head -1)
-# e.g. $BEAST/lphy-studio-1.3.1/lib
-LPHY_LIB="$BEAST/lphy-studio-1.4/lib"
+LPHY_LIB="$BEAST/lphy-studio-1.4.0/lib"
 echo "Set LPHY_LIB = $LPHY_LIB"
 echo $(ls "$LPHY_LIB")
-ARG="-Dbeast.user.package.dir=$LPHY_BEAST_DIR  -Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx60g -Duser.language=en"
+# must set -Dpicocli.disable.closures=true using picocli:4.7.0
+# it will throw otherwise java.lang.NoClassDefFoundError: groovy.lang.Closure
+ARG="-Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx60g -Duser.language=en"
 LPHY_BEAST="beast.pkgmgmt.launcher.AppLauncherLauncher lphybeast"
 if [ -n "$BEAST_EXTRA_LIBS" ]; then
-  "$JAVA" "$ARG" -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" "$LPHY_BEAST" $*
+  "$JAVA" $ARG -Dbeast.user.package.dir="$LPHY_BEAST_DI"R -Djava.library.path="$BEAST_EXTRA_LIBS" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
 else
-  "$JAVA" "$ARG" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" "$LPHY_BEAST" $*
+  "$JAVA" $ARG -Dbeast.user.package.dir="$LPHY_BEAST_DIR" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $LPHY_BEAST $*
 fi

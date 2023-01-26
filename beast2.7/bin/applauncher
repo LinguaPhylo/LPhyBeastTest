@@ -46,7 +46,7 @@ fi
 # use BEAST_EXTRA_LIBS variable to load BEAGLE and other libraries from non-default locations 
 # this assumes that the library path contains all these libraries (or are set through LD_LIBRARY_PATH)
 if [ -n "$BEAST_EXTRA_LIBS" ]; then 
-  "$JAVA" -Dbeast.user.package.dir=$LPHY_BEAST_DIR -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Djava.library.path="$BEAST_EXTRA_LIBS" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.AppLauncherLauncher $*
+  "$JAVA" -Dbeast.user.package.dir="$LPHY_BEAST_DIR" -Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Djava.library.path="$BEAST_EXTRA_LIBS" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.AppLauncherLauncher $*
 else	
-  "$JAVA" -Dbeast.user.package.dir=$LPHY_BEAST_DIR -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.AppLauncherLauncher $*
+  "$JAVA" -Dbeast.user.package.dir="$LPHY_BEAST_DIR" -Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true -Xms256m -Xmx8g -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.AppLauncherLauncher $*
 fi

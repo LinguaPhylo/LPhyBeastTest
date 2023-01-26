@@ -61,6 +61,10 @@ jobs:
           $BEAST/bin/packagemanager -add lphybeast
           $BEAST/bin/packagemanager -add LPhyBeastExt
           $BEAST/bin/packagemanager -list
+      - name: Validate lphybeast
+        run: |
+          $BEAST/bin/applauncher lphybeast -V
+          $BEAST/bin/lphybeast-mod -V
 
       - name: Check file paths
         run: |
