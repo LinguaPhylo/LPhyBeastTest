@@ -5,7 +5,6 @@ import beast.base.evolution.tree.Tree;
 import beastfx.app.tools.LogAnalyser;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -121,8 +120,7 @@ public class H5N1Test {
                 "HongKong prob=" + probArr[1] + ", Fujian prob=" + probArr[4]);
     }
 
-    // TODO java.lang.NoClassDefFoundError: beastfx.app.tools.Application
-    @Disabled
+    @Test
     void testTransitions() {
         File file = new File("h5n1.stc.out");
         assertTrue(file.exists(), "h5n1.stc.out");
