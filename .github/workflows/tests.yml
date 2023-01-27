@@ -33,7 +33,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
-          java-package: 'jre+fx'
+          java-package: 'jdk+fx'
 
       # PRERELEASE: true, then use prerelease.xml
       - name: Setup packages.url
