@@ -5,20 +5,16 @@ Comprehensive integration tests for LPhyBeast + BEAST2 tutorials
 
 ## Project structure
 
-1. **beast2**
-
-This directory contains all BEAST2 packages installed at runtime, 
-and also the configuration file `beauti.properties` to add the "extra" BEAST2 packages.
-
-2. __beast2.?.?__
+1. __beast2.7__
 
 This directory contains the installed BEAST2 applications, where the scripts 
 in the subfolder `bin` are modified to use the `beast2` directory as the package directory.
+It also contains the configuration file `beauti.properties` to add the prerelease.xml.
 Also see https://www.beast2.org/managing-packages/
 
-3. __lphy-studio-1.?.?__
+3. __lphy-studio-1.?__
 
-This directory is under __beast2.?.?__, containing the installed LPhy and LPhy studio.
+This directory is under __beast2.?__, containing the installed LPhy and LPhy studio.
 
 4. __lphybeast__
 
