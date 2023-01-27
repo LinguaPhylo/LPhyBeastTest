@@ -115,9 +115,10 @@ public class H5N1Test {
         assertEquals(1, sum, 1E-10, "sum prob");
 
         //HongKong prob is the biggest
-        assertTrue(probArr[1] > 0.4 && 0.2 > probArr[0] && 0.2 > probArr[2] &&
-                        0.2 > probArr[3] && probArr[1] > probArr[4],
-                "HongKong prob=" + probArr[1] + ", Fujian prob=" + probArr[4]);
+        assertTrue(probArr[1] > 0.4 && probArr[1] > probArr[0] &&
+                        0.2 > probArr[2] && probArr[1] > probArr[3] && 0.2 > probArr[4],
+                "Guangdong prob=" + probArr[0] + ", HongKong prob=" + probArr[1] + ", Hunan prob=" + probArr[2] +
+                        ", Guangxi prob=" + probArr[3] + ", Fujian prob=" + probArr[4]);
     }
 
     @Test
