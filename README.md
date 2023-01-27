@@ -12,11 +12,11 @@ in the subfolder `bin` are modified to use the `beast2` directory as the package
 It also contains the configuration file `beauti.properties` to add the prerelease.xml.
 Also see https://www.beast2.org/managing-packages/
 
-3. __lphy-studio-1.?__
+2. __lphy-studio-1.?__
 
 This directory is under __beast2.?__, containing the installed LPhy and LPhy studio.
 
-4. __lphybeast__
+3. __lphybeast__
 
 This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tree logs at runtime. 
 
