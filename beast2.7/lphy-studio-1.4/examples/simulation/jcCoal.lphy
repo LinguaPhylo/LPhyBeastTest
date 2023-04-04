@@ -1,12 +1,16 @@
-// set working dir = $PROJECT_DIR$/examples/simulation
-// keep no parent dir in the path to make unit test working
-// TODO: script works in studio but not in unit test
 data {
   // provide the absolute path if it is not working
-  D = simulate(lphy="jcSimData.lphy", alignmentId=["V","C"]);
+  // e.g. "$HOME$/WorkSpace/linguaPhylo/examples/simulation/jcSimData.lphy"
+  D = simulate(lphy="jcSimData.lphy", seed=777);
   V = get(key="V", map=D);
   C = get(key="C", map=D);
   taxa = V.taxa();
+  // True tree from jcSimData.lphy
+  T = get(key="ψ", map=D);
+  TL = T.treeLength();
+  rootAge = T.rootAge();
+  mis = get(key="mis", map=D);
+  l = length(mis);
 }
 model {
   Θ ~ LogNormal(meanlog=3.0, sdlog=1.0);

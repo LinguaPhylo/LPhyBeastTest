@@ -1,6 +1,7 @@
 data {
   L = 200;
   taxa = taxa(names=1:10);
+  RE = 5;
 }
 model {
   ψ ~ Coalescent(theta=0.2, taxa=taxa);
@@ -8,9 +9,10 @@ model {
   M ~ MissingSites(alignment=D, prob=0.75);
   mis = selectSites(alignment=M, unknownFracLess=0.75);
   var = variableSites(alignment=M);
-  const = invariableSites(alignment=M);
-  varmis = intersect(mis, var);
-  constmis = intersect(mis, const);
-  V = copySites(ids=varmis, alignment=M);
-  C = copySites(ids=constmis, alignment=M);
+  cst = invariableSites(alignment=M);
+  VM = intersect(mis, var);
+  CM = intersect(mis, cst);
+  P ~ sample(array=CM, size=round(length(CM)/RE));
+  Sid = concatArray(VM, repArray(array=sort(array=P), n=RE));
+  S = copySites(ids=Sid, alignment=M);
 }

@@ -2,7 +2,7 @@ plugins {
     `java-library`
 }
 
-version = "0.1.0"
+version = "1.0.0"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -22,7 +22,7 @@ tasks.test {
     }
     // set heap size for the test JVM(s)
     minHeapSize = "128m"
-    maxHeapSize = "1G"
+    maxHeapSize = "2G"
     // show standard out and standard error of the test JVM(s) on the console
     testLogging.showStandardStreams = true
 
