@@ -1,6 +1,6 @@
 #!/bin/sh
 
-### The command line program for running a LPhy script to create simulated data.
+### Launch LPhy studio from command line terminal
 
 if [ -z "$LPHY" ]; then
 	## resolve links - $0 may be a link to application
@@ -24,7 +24,5 @@ if [ -z "$LPHY" ]; then
 	cd "$saveddir"
 fi
 
-echo "LPHY path = $LPHY"
-
-LPHY_LIB="$LPHY/lib"
-java -Xms64m -Xmx5g -p "$LPHY_LIB" -m lphystudio/lphystudio.app.simulator.SLPhy $*
+LPHY_LIB=$LPHY/lib
+java -Xms64m -Xmx5g -p $LPHY_LIB -m lphystudio $*
