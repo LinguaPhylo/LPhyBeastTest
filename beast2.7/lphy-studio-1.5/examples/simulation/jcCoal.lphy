@@ -1,0 +1,24 @@
+data {
+  // provide the absolute path if it is not working
+  // e.g. "$HOME$/WorkSpace/linguaPhylo/examples/simulation/jcSimData.lphy"
+  D = simulate(lphy="jcSimData.lphy", seed=777);
+  V = get(key="V", map=D);
+  C = get(key="C", map=D);
+  VL = V.nchar();
+  CL = C.nchar();
+  taxa = V.taxa();
+  // True tree from jcSimData.lphy
+  T = get(key="ψ", map=D);
+  TL = T.treeLength();
+  rootAge = T.rootAge();
+  mis = get(key="mis", map=D);
+  l = length(mis);
+}
+model {
+  Θ ~ LogNormal(meanlog=3.0, sdlog=1.0);
+  ψ ~ Coalescent(theta=Θ, taxa=taxa);
+  Q = jukesCantor();
+  // clamped to the simulated data
+  V ~ PhyloCTMC(tree=ψ, L=VL, Q=Q);
+  C ~ PhyloCTMC(tree=ψ, L=CL, Q=Q);
+}

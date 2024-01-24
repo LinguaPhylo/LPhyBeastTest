@@ -1,5 +1,5 @@
-<package name='BEAST.app' version='2.7.4'>
-	<depends on='BEAST.base' atleast='2.7.4' atmost="2.7.9"/>
+<package name='BEAST.app' version='2.7.6'>
+	<depends on='BEAST.base' atleast='2.7.6' atmost="2.7.9"/>
 
 			<service type="beastfx.app.beauti.ThemeProvider">
 				<provider classname="beastfx.app.beauti.theme.Default"/>
@@ -14,6 +14,7 @@
 				<provider classname="beastfx.app.inputeditor.BEASTObjectInputEditor"/>
 				<provider classname="beastfx.app.inputeditor.TypeTraitSetInputEditor"/>
 				<provider classname="beastfx.app.inputeditor.BooleanInputEditor"/>
+				<provider classname="beastfx.app.inputeditor.ConstantInputEditor"/>
 				<provider classname="beastfx.app.inputeditor.DoubleInputEditor"/>
 				<provider classname="beastfx.app.inputeditor.DoubleListInputEditor"/>
 				<provider classname="beastfx.app.inputeditor.EnumInputEditor"/>
@@ -46,6 +47,8 @@
 				<provider classname="beastfx.app.inputeditor.TipDatesInputEditor"/>
 				<provider classname="beastfx.app.beauti.ClockModelListInputEditor"/>
 				<provider classname="beastfx.app.beauti.ConstantPopulationInputEditor"/>
+				<provider classname="beastfx.app.beauti.ExponentialPopulationInputEditor"/>
+				<provider classname="beastfx.app.beauti.ScaledPopulationInputEditor"/>
 				<provider classname="beastfx.app.beauti.GeneTreeForSpeciesTreeDistributionInputEditor"/>
 				<provider classname="beastfx.app.beauti.OperatorListInputEditor"/>
 				<provider classname="beastfx.app.beauti.SpeciesTreePriorInputEditor"/>
@@ -86,6 +89,19 @@
 
 			<service type="has.main.method">
 				<provider classname="beastfx.app.methodsection.XML2HTMLPaneFX"/>
+			</service>
+
+			<service type="beastfx.app.treeannotator.services.TopologySettingService">
+				<provider classname="beastfx.app.treeannotator.services.MCCTopologyService"/>
+				<provider classname="beastfx.app.treeannotator.services.MaxSumCladeCrediblityTopologyService"/>
+				<provider classname="beastfx.app.treeannotator.services.UserTargetTreeTopologyService"/>
+			</service>
+
+			<service type="beastfx.app.treeannotator.services.NodeHeightSettingService">
+				<provider classname="beastfx.app.treeannotator.services.CommonAncestorNodeHeigtService"/>
+				<provider classname="beastfx.app.treeannotator.services.KeepHeightsNodeHeightsService"/>
+				<provider classname="beastfx.app.treeannotator.services.MeanNodeHeightService"/>
+				<provider classname="beastfx.app.treeannotator.services.MedianNodeHeightService"/>
 			</service>
 
 	    <packageapp description="Interactive Methods Section Generator"
