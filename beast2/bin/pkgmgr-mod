@@ -1,0 +1,6 @@
+#!/bin/sh
+
+PAKG_LIB="$HOME/LPhyBeastTest/"
+BEAST_LIB="$PAKG_LIB/beast2/lib"
+
+java -Xmx8g -Dbeast.user.package.dir="$PAKG_LIB" -cp "$BEAST_LIB/launcher.jar" -Duser.language=en beast.pkgmgmt.PackageManager $*
