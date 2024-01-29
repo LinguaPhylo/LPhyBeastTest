@@ -1,9 +1,8 @@
 #!/bin/sh
 
-PAKG_LIB="$HOME/LPhyBeastTest/"
-ls $PAKG_LIB
 
-BEAST_LIB="$PAKG_LIB/beast2/lib"
+BEAST="$HOME/LPhyBeastTest/beast276"
+BEAST_LIB="$BEAST/lib"
+echo "BEAST_LIB = $BEAST_LIB"
 
-java -Dbeast.debug=true -Dbeast.log.level=trace -Xmx8g -Dbeast.user.package.dir="$PAKG_LIB" -Djava.library.path="$BEAGLE_LIB_PATH" -Dlauncher.wait.for.exit=true -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.launcher.BeastLauncher $*
-
+java -Xms256m -Xmx8g -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.PackageManager $*
