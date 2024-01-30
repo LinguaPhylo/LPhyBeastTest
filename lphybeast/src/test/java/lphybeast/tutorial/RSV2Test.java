@@ -21,7 +21,7 @@ public class RSV2Test {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("RSV2.log", TestUtils.BURNIN_PERC);
+        logAnalyser = new LogAnalyser("xmls/RSV2.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class RSV2Test {
     @Test
     void testMCCTreeAndNode() {
         double mean = logAnalyser.getMean("psi.height");
-        Tree mccTree = TestUtils.assertMCCTree("RSV2.tree", mean);
+        Tree mccTree = TestUtils.assertMCCTree("xmls/RSV2.tree", mean);
 
         // USALongs56 is child of root
         Node usa56 = null;

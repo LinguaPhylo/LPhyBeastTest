@@ -22,7 +22,7 @@ public class H3N2Test {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("h3n2.log", TestUtils.BURNIN_PERC);
+        logAnalyser = new LogAnalyser("xmls/h3n2.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class H3N2Test {
     @Test
     void testMCCTree() {
         double mean = logAnalyser.getMean("psi.height");
-        Tree mccTree = TestUtils.assertMCCTree("h3n2.mascot.tree", mean);
+        Tree mccTree = TestUtils.assertMCCTree("xmls/h3n2.mascot.tree", mean);
 
         // check root meta data
         Node root = mccTree.getRoot();

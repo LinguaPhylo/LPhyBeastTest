@@ -21,7 +21,7 @@ public class HCVTest {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("hcv_coal.log", TestUtils.BURNIN_PERC);
+        logAnalyser = new LogAnalyser("xmls/hcv_coal.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class HCVTest {
     @Test
     void testMCCTree() {
         double mean = logAnalyser.getMean("psi.height");
-        Tree mccTree = TestUtils.assertMCCTree("hcv_coal.tree", mean);
+        Tree mccTree = TestUtils.assertMCCTree("xmls/hcv_coal.tree", mean);
     }
 
     @Test

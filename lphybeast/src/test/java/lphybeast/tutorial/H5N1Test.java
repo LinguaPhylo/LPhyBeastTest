@@ -26,7 +26,7 @@ public class H5N1Test {
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("h5n1.log", TestUtils.BURNIN_PERC);
+        logAnalyser = new LogAnalyser("xmls/h5n1.log", TestUtils.BURNIN_PERC);
     }
 
     @Test
@@ -123,8 +123,8 @@ public class H5N1Test {
 
     @Test
     void testTransitions() {
-        File file = new File("h5n1.stc.out");
-        assertTrue(file.exists(), "h5n1.stc.out");
+        File file = new File("xmls/h5n1.stc.out");
+        assertTrue(file.exists(), "xmls/h5n1.stc.out");
 
         boolean startToCount = false;
         // Fujian=>Hunan  Guangdong=>Hunan  Guangxi=>Hunan  HongKong=>Hunan

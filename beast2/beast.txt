@@ -21,15 +21,15 @@ srun BEASTDIR/bin/beast -beagle_SSE -seed SEED -overwrite STEM.xml
 srun BEASTDIR/bin/loganalyser  STEM.log
 
 if [[ "STEM" == "h5n1" ]]; then
-    srun BEASTDIR/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+    srun BEASTDIR/bin/treeannotator -burnin 10 -height mean h5n1_with_trait.trees h5n1_with_trait.tree
     
     # packagemanager -add Babel
     srun BEASTDIR/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
 
 
 elif [[ "STEM" == "h3n2" ]]; then
-    srun BEASTDIR/bin/treeannotator -burnin 20 -heights mean h3n2.mascot.trees h3n2.mascot.tree
+    srun BEASTDIR/bin/treeannotator -burnin 10 -height mean h3n2.mascot.trees h3n2.mascot.tree
     
 else
-    srun BEASTDIR/bin/treeannotator -burnin 20 -heights mean STEM.trees STEM.tree
+    srun BEASTDIR/bin/treeannotator -burnin 10 -height mean STEM.trees STEM.tree
 fi
