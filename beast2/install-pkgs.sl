@@ -21,7 +21,7 @@ module load Java/17
 echo "set BEAST = $BEAST"
 echo "set BEAST_LIB = $BEAST_LIB, LIB_DIR_BAK = $LIB_DIR_BAK"
 echo "ls beast dir :"
-ls $BEAST
+echo $(ls "$BEAST")
 echo ""
 
 ### 2. install base
@@ -31,7 +31,7 @@ rm -r $BEAST_LIB
 cp -r $LIB_DIR_BAK $BEAST_LIB
 
 echo "clean beast libs :"
-ls $BEAST_LIB
+echo $(ls "$BEAST_LIB")
 echo ""
 
 # customised beauti.properties
@@ -46,7 +46,7 @@ cp $BEAST_LIB/packages/BEAST.base*.jar $BEAST_LIB/BEAST.base/lib
 
 # check base
 echo "check if base is installed : "
-ls $BEAST_LIB
+echo $(ls "$BEAST_LIB")
 echo ""
 
 
@@ -64,4 +64,43 @@ $JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp
 echo ""
 
 $JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -list
+
+### 5. set LPHY_LIB
+
+echo ""
+echo ""
+echo ""
+
+echo "Set LPHY_LIB = $LPHY_LIB"
+echo $(ls "$LPHY_LIB")
+
+# prepare dir to store xmls
+XML_DIR="$ROOT_DIR/xmls"
+if [ -d $XML_DIR ]; then
+  rm -r $XML_DIR
+fi
+
+echo $(mkdir "$XML_DIR")
+
+# lphy scripts
+LPHY_SCRIPTS="$LPHY_LIB/../tutorials"
+echo $(ls "$LPHY_SCRIPTS")
+echo ""
+
+
+### 6. create XMLs
+
+# must set -Dpicocli.disable.closures=true using picocli:4.7.0
+# otherwise it will throw otherwise java.lang.NoClassDefFoundError: groovy.lang.Closure
+MORE_ARG="-Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true"
+APP_LB="beast.pkgmgmt.launcher.AppLauncherLauncher lphybeast"
+
+LB_ARGS="-l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy"
+
+$JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
+
+
+
+
+
 

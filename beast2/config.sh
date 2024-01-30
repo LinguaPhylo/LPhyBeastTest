@@ -5,9 +5,13 @@
 DIR_NAME="beast276"
 # Export environment variables
 #export DIR_NAME
+ROOT_DIR="$HOME/LPhyBeastTest"
+
+# lphy lib
+LPHY_LIB="$ROOT_DIR/lphy-studio-1.5.0/lib"
 
 # must define $BEAST before everything
-BEAST="$HOME/LPhyBeastTest/$DIR_NAME"
+BEAST="$ROOT_DIR/$DIR_NAME"
 #export BEAST
 BEAST_LIB="$BEAST/lib"
 #export BEAST_LIB
