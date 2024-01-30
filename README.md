@@ -4,23 +4,23 @@ Comprehensive integration tests for LPhyBeast + BEAST2 tutorials
 
 ## Folder structure, setup beast2 and lphy
 
-1. Working dir is `$HOME/LPhyBeastTest`
+- Working dir is `$HOME/LPhyBeastTest`
 
-2. install beast2.7.* under this folder, for example:
+- install beast2.7.* under this folder, for example:
 
 ```bash
 tar -xvzf BEAST.v2.7.6.Linux.x86.tgz
 ```
 
-3. install lphy under this folder, for example:
+- install lphy under this folder, for example:
 
 ```bash
 unzip lphy-studio-1.5.0.zip
 ```
 
-4. install all beast2 packages under `$BEAST_LIB`.
+- install all beast2 packages under `$BEAST_LIB`.
 
-5. make modified [beauti.properties](./beauti.properties) available under this folder.
+- make modified [beauti.properties](./beauti.properties) available under this folder.
 
 
 ## Testing pipeline
