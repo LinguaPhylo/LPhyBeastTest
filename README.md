@@ -25,7 +25,7 @@ unzip lphy-studio-1.5.0.zip
 
 ## Testing pipeline
 
-### Setup lphybeast and its ext
+### Setup lphybeast and create XMLs
 
 1. `ssh mahuika`
 
@@ -33,11 +33,11 @@ unzip lphy-studio-1.5.0.zip
 
 3. `rm *.txt`, this cleans previous output.
 
-4. `sbatch install-pkgs.sl`, which installs all beast2 packages.
+4. `sbatch install-pkgs.sl`, which installs all beast2 or lphy packages, and creates XMLs.
 
 5. `vi install-pkgs.txt`, after the job is done.
 
-### Create XMLs and run
+### Run XMLs and analyse log
 
 
 
