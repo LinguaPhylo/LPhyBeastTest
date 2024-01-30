@@ -1,8 +1,0 @@
-#!/bin/sh
-
-
-BEAST="$HOME/LPhyBeastTest/beast276"
-BEAST_LIB="$BEAST/lib"
-echo "BEAST_LIB = $BEAST_LIB"
-
-java -Xms256m -Xmx8g -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -Duser.language=en -cp "$BEAST_LIB/launcher.jar" beast.pkgmgmt.PackageManager $*
