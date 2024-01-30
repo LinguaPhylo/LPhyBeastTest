@@ -1,0 +1,36 @@
+#!/bin/sh
+#SBATCH -J XML       		# The job name
+#SBATCH -A nesi00390		# The account code
+#SBATCH --time=72:00:00         # The walltime
+#SBATCH --mem=2G 	        # in total
+#SBATCH --cpus-per-task=2       # OpenMP Threads
+#SBATCH --ntasks=1              # not use MPI
+#SBATCH --hint=multithread      # A multithreaded job, also a Shared-Memory Processing (SMP) job
+#SBATCH -D ./			# The initial directory
+#SBATCH -o XML_out.txt		# The output file
+#SBATCH -e XML_err.txt		# The error file
+
+# beagle
+module load beagle-lib/4.0.0-GCC-11.3.0
+module load Java/17
+
+# beast 2.7.x 
+srun BEAST_DIR/bin/beast -beagle_SSE -seed SEED XML
+
+stem=${XML%.xml}
+
+srun BEAST_DIR/bin/loganalyser  "$stem.log"
+
+if [[ "$stem" == "h5n1" ]]; then
+    srun BEAST_DIR/bin/treeannotator -burnin 20 -heights mean h5n1_with_trait.trees h5n1_with_trait.tree
+    
+    # packagemanager -add Babel
+    srun BEAST_DIR/bin/applauncher StateTransitionCounter -burnin 10 -in h5n1_with_trait.trees -tag location -out h5n1.stc.out
+
+
+elif [[ "$stem" == "mascot" ]]; then
+    srun BEAST_DIR/bin/treeannotator -burnin 20 -heights mean h3n2.mascot.trees h3n2.mascot.tree
+    
+else
+    srun BEAST_DIR/bin/treeannotator -burnin 20 -heights mean "$stem.trees" "$stem.tree"
+fi

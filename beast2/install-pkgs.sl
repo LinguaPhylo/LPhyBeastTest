@@ -74,12 +74,12 @@ echo ""
 echo "Set LPHY_LIB = $LPHY_LIB"
 echo $(ls "$LPHY_LIB")
 
-# prepare dir to store xmls
+# prepare dir to store xmls, if exist then delete
 XML_DIR="$ROOT_DIR/xmls"
 if [ -d $XML_DIR ]; then
   rm -r $XML_DIR
 fi
-
+# create xmls dir
 echo $(mkdir "$XML_DIR")
 
 # lphy scripts
@@ -110,7 +110,7 @@ LB_ARGS="-l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 
-# h3n2
+# h3n2a
 LB_ARGS="-l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 

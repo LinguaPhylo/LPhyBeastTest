@@ -52,3 +52,18 @@ b2pkg="-list"
 
 sed "s/B2PKG/$b2pkg/g;s/CMD/$pkgcmd/g;s/BLIB/$bdiresc/g" ./pkgmgr.txt > tmp.sl
 sbatch tmp.sl 
+
+
+### run beast
+
+# sed cannot accept / in the s command, pre-process path to escape the slashes
+xmlfile=$(echo "$ROOT_DIR/xml/h5n1.xml" | sed 's_/_\\/_g')
+echo "xmlfile = $xmlfile"
+
+sed "s/BEAST_DIR/$BEAST/g;s/XML/$xmlfile/g" ./beast.txt > h5n1.sl
+sbatch h5n1.sl 
+
+
+
+
+
