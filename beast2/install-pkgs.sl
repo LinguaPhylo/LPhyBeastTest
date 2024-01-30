@@ -1,5 +1,5 @@
 #!/bin/sh
-#SBATCH -J install pkgs		# The job name
+#SBATCH -J install-pkgs		# The job name
 #SBATCH -A nesi00390		# The account code
 #SBATCH --time=3:00:00         # The walltime
 #SBATCH --mem=4G 	        # in total
@@ -7,8 +7,8 @@
 #SBATCH --ntasks=1              # not use MPI
 #SBATCH --hint=multithread      # A multithreaded job, also a Shared-Memory Processing (SMP) job
 #SBATCH -D ./			# The initial directory
-#SBATCH -o B2PKG.txt		# The output file
-#SBATCH -e B2PKG.txt		# The error file
+#SBATCH -o install-pkgs.txt		# The output file
+#SBATCH -e install-pkgs.txt		# The error file
 
 
 #module load beagle-lib/4.0.0-GCC-11.3.0
