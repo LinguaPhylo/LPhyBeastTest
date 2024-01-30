@@ -16,13 +16,23 @@ module load Java/17
 
 ### 1. load config
 
-./config
+. $HOME/LPhyBeastTest/config.sh
+
+echo "set BEAST = $BEAST"
+echo "set BEAST_LIB = $BEAST_LIB, LIB_DIR_BAK = $LIB_DIR_BAK"
+echo "ls beast dir :"
+ls $BEAST
+echo ""
 
 ### 2. install base
 
 # rm lib folder where all b2 pkgs are installed
 rm -r $BEAST_LIB
-cp -r $BEAST/lib-bak $BEAST_LIB
+cp -r $LIB_DIR_BAK $BEAST_LIB
+
+echo "clean beast libs :"
+ls $BEAST_LIB
+echo ""
 
 # customised beauti.properties
 cp beauti.properties $BEAST_LIB
@@ -33,23 +43,25 @@ cp $BEAST_LIB/packages/BEAST.base.version.xml $BEAST_LIB/BEAST.base/version.xml
 mkdir $BEAST_LIB/BEAST.base/lib
 cp $BEAST_LIB/packages/BEAST.base*.jar $BEAST_LIB/BEAST.base/lib
 
-ls -la $BEAST_LIB/BEAST.base/lib
 
-# install lphybeast, lphybeast-ext
-ls -la $BEAST_LIB
+# check base
+echo "check if base is installed : "
+ls $BEAST_LIB
+echo ""
 
 
 ### 3. install lphybeast and LPhyBeastExt
 
-CMD_PKGMG="java -Xms256m -Xmx8g -Dbeast.user.package.dir=$BEAST_LIB -Djava.library.path=$BEAST_LIB -Duser.language=en -cp $BEAST_LIB/launcher.jar beast.pkgmgmt.PackageManager"
+JAVA="java -Xms256m -Xmx8g -Duser.language=en"
+PKG_MG="beast.pkgmgmt.PackageManager"
 
-$CMD_PKGMG -add lphybeast
+$JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -add lphybeast
 
-$CMD_PKGMG -add LPhyBeastExt
+$JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -add LPhyBeastExt
 
 ### 4. list pkg
 
-ls -la $BEAST_LIB
+echo ""
 
-$CMD_PKGMG -list
+$JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -list
 

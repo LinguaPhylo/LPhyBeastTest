@@ -1,42 +1,43 @@
-# LPhyBeastTest
-<a href="./ProjectStructure.png"><img src="ProjectStructure.png" align="right" width=300></a>
+# LPhyBeastTest in NeSI
 
 Comprehensive integration tests for LPhyBeast + BEAST2 tutorials
 
-## Due to Github issue
+## Folder structure, setup beast2 and lphy
 
-This project will run in NeSI.
+1. Working dir is `$HOME/LPhyBeastTest`
 
+2. install beast2.7.* under this folder, for example:
 
-## Project structure
+```bash
+tar -xvzf BEAST.v2.7.6.Linux.x86.tgz
+```
 
-1. __beast__
+3. install lphy under this folder, for example:
 
-This directory contains the installed BEAST2 applications, where the scripts 
-in the subfolder `bin` are modified to use the `beast` directory as the package directory.
-It also contains the configuration file `beauti.properties` to add the prerelease.xml.
-Also see https://www.beast2.org/managing-packages/
+```bash
+unzip lphy-studio-1.5.0.zip
+```
 
-2. __lphy-studio-1.?__
+4. install all beast2 packages under `$BEAST_LIB`.
 
-This directory is under __beast?__, containing the installed LPhy and LPhy studio.
-
-3. __lphybeast__
-
-This directory contains JUnit tests, and also the BEAST 2 XMLs, log files and tree logs at runtime. 
-
-## Run tests
-
-- Update all dependencies, such as lphy, beast2, etc.
+5. make modified [beauti.properties](./beauti.properties) available under this folder.
 
 
-- Test LPhyBeast or LPhyBeastExt before final release
-  1. update the versions and links in [prerelease.xml](beast2.7/lib/prerelease.xml).
-  2. set the env variable `PRERELEASE` to `true` in [tests.yml](.github/workflows/tests.txt).
-  3. commit and push to trigger the testing workflow.
+## Testing pipeline
+
+### Setup lphybeast and its ext
+
+1. `ssh mahuika`
+
+2. `cd $HOME/LPhyBeastTest`
+
+3. `rm *.txt`, this cleans previous output.
+
+4. `sbatch install-pkgs.sl`, which installs all beast2 packages.
+
+5. `vi install-pkgs.txt`, after the job is done.
+
+### Create XMLs and run
 
 
-- Test LPhyBeast or LPhyBeastExt after final release
-  1. update the versions and links in [CBAN](https://github.com/CompEvol/CBAN).
-  2. set the env variable `PRERELEASE` to `false` in [tests.yml](.github/workflows/tests.txt).
-  3. commit and push to trigger the testing workflow.
+
