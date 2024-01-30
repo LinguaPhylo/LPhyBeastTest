@@ -1,3 +1,0 @@
-data {
-  table = readDelim(file="data/bears_taxa.tsv", sep="\t");
-}

@@ -1,4 +1,0 @@
-weights = [100,100,100,700];
-conc = [1.0,1.0,1.0,1.0];
-rates ~ WeightedDirichlet(conc=conc, weights=weights);
-weightedSum = sum(rates * weights);

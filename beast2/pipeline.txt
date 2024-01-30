@@ -1,0 +1,54 @@
+
+
+# not working
+# b2pkg="BEAST.base"
+
+
+## 
+
+DIR_NAME="beast276"
+# must define $BEAST before everything
+BEAST="$HOME/LPhyBeastTest/$DIR_NAME"
+BEAST_LIB="$BEAST/lib"
+
+echo "set BEAST_LIB = $BEAST_LIB"
+
+# customised beauti.properties
+
+cp beauti.properties $BEAST_LIB
+
+# have to install base manually
+mkdir $BEAST_LIB/BEAST.base
+cp $BEAST_LIB/packages/BEAST.base.version.xml $BEAST_LIB/BEAST.base/version.xml
+mkdir $BEAST_LIB/BEAST.base/lib
+cp $BEAST_LIB/packages/BEAST.base*.jar $BEAST_LIB/BEAST.base/lib
+
+ls -la $BEAST_LIB/BEAST.base/lib
+
+# install lphybeast, lphybeast-ext
+ls -la $BEAST_LIB
+
+
+# sed cannot accept / in the s command, pre-process path to escape the slashes
+bdiresc=$(echo $BEAST_LIB | sed 's_/_\\/_g')
+echo "bdiresc = $bdiresc"
+
+pkgcmd="-add"
+b2pkg="lphybeast"
+
+sed "s/B2PKG/$b2pkg/g;s/CMD/$pkgcmd/g;s/BLIB/$bdiresc/g" ./pkgmgr.txt > tmp.sl
+sbatch tmp.sl 
+
+pkgcmd="-add"
+b2pkg="LPhyBeastExt"
+
+sed "s/B2PKG/$b2pkg/g;s/CMD/$pkgcmd/g;s/BLIB/$bdiresc/g" ./pkgmgr.txt > tmp.sl
+sbatch tmp.sl 
+
+ls -la $BEAST_LIB
+
+pkgcmd=""
+b2pkg="-list"
+
+sed "s/B2PKG/$b2pkg/g;s/CMD/$pkgcmd/g;s/BLIB/$bdiresc/g" ./pkgmgr.txt > tmp.sl
+sbatch tmp.sl 
