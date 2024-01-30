@@ -11,63 +11,53 @@ echo "set BEAST = $BEAST"
 XML_DIR="$ROOT_DIR/xmls"
 
 echo "XML_DIR = $XML_DIR , which has the following XMLs : "
-echo $(ls "$XML_DIR/*.xml")
-
+# print each line in new line
+ls $XML_DIR/*.xml| while read line; do echo $line; done
 
 ### 3. run beast
 
-TUTORIAL="h5n1"
-FILE="$XML_DIR/$TUTORIAL.xml"
-if [ -f $FILE ]; then
-   # sed cannot accept / in the s command, pre-process path to escape the slashes
-   xmlfile=$(echo "$FILE" | sed 's_/_\\/_g')
-   echo "xmlfile = $xmlfile"
+cd $XML_DIR
 
-   sed "s/BEAST_DIR/$BEAST/g;s/XML/$xmlfile/g" ./beast.txt > "$TUTORIAL.sl"
-   sbatch "$TUTORIAL.sl" 
+seed=777
+# sed cannot accept / in the s command, pre-process path to escape the slashes
+bdir=$(echo "$BEAST" | sed 's_/_\\/_g')
+echo "bdir = $bdir"
+
+tutorial="h5n1"
+if [ -f $tutorial.xml ]; then
+   sed "s/BEASTDIR/$bdir/g;s/STEM/$tutorial/g;s/SEED/$seed/g" ../beast.txt > "$tutorial.sl"
+   sbatch "$tutorial.sl" 
 else
-   echo "Error: cannot find $FILE !"
+   echo "Error: cannot find $tutorial.xml!"
 fi
 
 
-TUTORIAL="RSV2"
-FILE="$XML_DIR/$TUTORIAL.xml"
-if [ -f $FILE ]; then
-   # sed cannot accept / in the s command, pre-process path to escape the slashes
-   xmlfile=$(echo "$FILE" | sed 's_/_\\/_g')
-   echo "xmlfile = $xmlfile"
-
-   sed "s/BEAST_DIR/$BEAST/g;s/XML/$xmlfile/g" ./beast.txt > "$TUTORIAL.sl"
-   sbatch "$TUTORIAL.sl" 
+tutorial="RSV2"
+if [ -f $tutorial.xml ]; then
+   sed "s/BEASTDIR/$bdir/g;s/STEM/$tutorial/g;s/SEED/$seed/g" ../beast.txt > "$tutorial.sl"
+   sbatch "$tutorial.sl" 
 else
-   echo "Error: cannot find $FILE !"
+   echo "Error: cannot find $tutorial.xml !"
 fi
 
-TUTORIAL="hcv_coal"
-FILE="$XML_DIR/$TUTORIAL.xml"
-if [ -f $FILE ]; then
-   # sed cannot accept / in the s command, pre-process path to escape the slashes
-   xmlfile=$(echo "$FILE" | sed 's_/_\\/_g')
-   echo "xmlfile = $xmlfile"
-
-   sed "s/BEAST_DIR/$BEAST/g;s/XML/$xmlfile/g" ./beast.txt > "$TUTORIAL.sl"
-   sbatch "$TUTORIAL.sl" 
+tutorial="hcv_coal"
+if [ -f $tutorial.xml ]; then
+   sed "s/BEASTDIR/$bdir/g;s/STEM/$tutorial/g;s/SEED/$seed/g" ../beast.txt > "$tutorial.sl"
+   sbatch "$tutorial.sl" 
 else
-   echo "Error: cannot find $FILE !"
-firor: cannot find $FILE !"
+   echo "Error: cannot find $tutorial.xml !"
 fi
 
 
-TUTORIAL="h3n2"
-FILE="$XML_DIR/$TUTORIAL.xml"
-if [ -f $FILE ]; then
-   # sed cannot accept / in the s command, pre-process path to escape the slashes
-   xmlfile=$(echo "$FILE" | sed 's_/_\\/_g')
-   echo "xmlfile = $xmlfile"
-
-   sed "s/BEAST_DIR/$BEAST/g;s/XML/$xmlfile/g" ./beast.txt > "$TUTORIAL.sl"
-   sbatch "$TUTORIAL.sl" 
+tutorial="h3n2"
+if [ -f $tutorial.xml ]; then
+   sed "s/BEASTDIR/$bdir/g;s/STEM/$tutorial/g;s/SEED/$seed/g" ../beast.txt > "$tutorial.sl"
+   sbatch "$tutorial.sl" 
 else
-   echo "Error: cannot find $FILE !"
+   echo "Error: cannot find $tutorial.xml !"
 fi
+
+# suppose back to $ROOT_DIR
+cd $ROOT_DIR
+
 

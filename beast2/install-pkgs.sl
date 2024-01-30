@@ -59,6 +59,9 @@ $JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp
 
 $JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -add LPhyBeastExt
 
+# require Babel for h5n1 estimating transitions
+$JAVA -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar" $PKG_MG -add Babel
+
 ### 4. list pkg
 
 echo ""
@@ -119,4 +122,8 @@ echo ""
 echo ""
 echo ""
 echo $(ls "$XML_DIR")
+
+mkdir $ROOT_DIR/lphybeast
+# mv all lphybeast true logs and trees, except xmls
+mv $XML_DIR/!(*.xml) $ROOT_DIR/lphybeast
 
