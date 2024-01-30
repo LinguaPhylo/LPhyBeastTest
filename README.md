@@ -25,11 +25,11 @@ unzip lphy-studio-1.5.0.zip
 
 ## Testing pipeline
 
-### Setup lphybeast and create XMLs
-
 1. `ssh mahuika`
 
 2. `cd $HOME/LPhyBeastTest`
+
+### Setup lphybeast and create XMLs
 
 3. `rm *.txt`, this cleans previous output.
 
