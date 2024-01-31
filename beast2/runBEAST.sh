@@ -32,7 +32,8 @@ else
 fi
 
 
-tutorial="RSV2"
+# RSV2long.xml
+tutorial="RSV2long"
 if [ -f $tutorial.xml ]; then
    sed "s/BEASTDIR/$bdir/g;s/STEM/$tutorial/g;s/SEED/$seed/g" ../beast.txt > "$tutorial.sl"
    sbatch "$tutorial.sl" 

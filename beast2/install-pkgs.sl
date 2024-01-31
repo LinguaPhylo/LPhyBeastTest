@@ -98,23 +98,23 @@ echo ""
 MORE_ARG="-Dpicocli.disable.closures=true -Dlauncher.wait.for.exit=true"
 APP_LB="beast.pkgmgmt.launcher.AppLauncherLauncher lphybeast"
 
-# h5n1
+# h5n1 : 3M chain length
 LB_ARGS="-l 3000000 -o $XML_DIR/h5n1.xml $LPHY_SCRIPTS/h5n1.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 
-# RSV2
-LB_ARGS="-l 5000000 -o $XML_DIR/RSV2.xml $LPHY_SCRIPTS/RSV2.lphy"
+# RSV2 : 20M chain length
+LB_ARGS="-l 20000000 -o $XML_DIR/RSV2long.xml $LPHY_SCRIPTS/RSV2.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 
-# hcv_coal
-LB_ARGS="-l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy"
+# hcv_coal : 30M
+LB_ARGS="-l 30000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 
-# h3n2a
-LB_ARGS="-l 10000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy"
+# h3n2 : 3M
+LB_ARGS="-l 3000000 -o $XML_DIR/h3n2.xml $LPHY_SCRIPTS/h3n2.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 
 
