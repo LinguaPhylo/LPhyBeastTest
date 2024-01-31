@@ -125,5 +125,4 @@ echo $(ls "$XML_DIR")
 
 mkdir $ROOT_DIR/lphybeast
 # mv all lphybeast true logs and trees, except xmls
-mv $XML_DIR/!(*.xml) $ROOT_DIR/lphybeast
-
+mv xmls/!(*.xml) lphybeast/
