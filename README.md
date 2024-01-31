@@ -56,7 +56,7 @@ unzip lphy-studio-1.5.0.zip
 
 6. run `runBEAST.sh` under $HOME/LPhyBeastTest.
 
-7. after all jobs are done, `scp -r mahuika:$HOME/LPhyBeastTest/xmls/ $LOCAL/LPhyBeastTest/lphybeast`. The subfolder should contain all beast results. 
+7. after all jobs are done, transfer the entire subfolder `xmls` to the local, such as `scp -r mahuika:$HOME/LPhyBeastTest/xmls/ $LOCAL/LPhyBeastTest/lphybeast`. The subfolder should contain all beast results. 
 
 8. use IntelliJ or Gradle to run all JUnit tests under `lphybeast.tutorial`, to validate the estimated parameter values.
 
