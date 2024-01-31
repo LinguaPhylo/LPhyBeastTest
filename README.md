@@ -60,3 +60,10 @@ unzip lphy-studio-1.5.0.zip
 
 8. use IntelliJ or Gradle to run all JUnit tests under `lphybeast.tutorial`, to validate the estimated parameter values.
 
+### TODO
+
+- [Building pipelines using slurm dependencies](https://hpc.nih.gov/docs/job_dependencies.html)
+
+- Gradle test in NeSI ?
+  i.  [how to use gradle offline](https://stackoverflow.com/questions/32171524/how-to-configure-gradle-to-work-offline-using-cached-dependencies)
+  ii. [Where does Gradle store downloaded jars ?](https://stackoverflow.com/questions/10834111/where-does-gradle-store-downloaded-jars-on-the-local-file-system)
