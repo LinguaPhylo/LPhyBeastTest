@@ -37,9 +37,10 @@ public class RSV2Test {
         mean = logAnalyser.getMean("pi_2.A");
         assertEquals(0.32, mean, 0.5, "pi_2.A");
 
+        // if this is incorrect, then check XML if the alignment ref in tree likelihood has the correct index.
         mean = logAnalyser.getMean("kappa.3");
         assertEquals(10.68, mean, 1.0, "kappa.3");
-
+        // 3rd codon mutation rate is fastest
         mean = logAnalyser.getMean("r_0");
         assertEquals(0.67, mean, 0.5, "r_0");
         mean = logAnalyser.getMean("r_1");

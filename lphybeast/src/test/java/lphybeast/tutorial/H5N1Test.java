@@ -64,7 +64,7 @@ public class H5N1Test {
     void testMCCTreeAndNode() {
         double mean = logAnalyser.getMean("psi.height");
 
-        Tree mccTree = TestUtils.assertMCCTree("h5n1_with_trait.tree", mean);
+        Tree mccTree = TestUtils.assertMCCTree("xmls/h5n1_with_trait.tree", mean);
         Node root = mccTree.getRoot();
 
         // check nodes
