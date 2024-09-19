@@ -6,7 +6,7 @@
         <version>${revision}</version>
     </parent>
 
-    <name>beast2</name>
+    <artifactId>beast2</artifactId>
 
 
 

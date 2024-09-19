@@ -6,7 +6,7 @@
         <version>${revision}</version>
     </parent>
 
-    <name>lphy</name>
+    <artifactId>lphy</artifactId>
 
 
 
