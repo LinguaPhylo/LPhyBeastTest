@@ -1,0 +1,13 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.github.linguaphylo</groupId>
+        <artifactId>lphybeasttest</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <name>beast2</name>
+
+
+
+</project>
