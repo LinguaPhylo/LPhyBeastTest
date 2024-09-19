@@ -8,8 +8,12 @@
     <packaging>pom</packaging>
 
     <properties>
-        <!-- it is used as project.version -->
+        <lphy.vision>1.6.0</lphy.vision>
+        <beast.version>2.7.7</beast.version>
+        <!-- lphybeast version, used as project.version -->
         <revision>1.1.0</revision>
+        <!-- used by lphybeast ext -->
+        <lphybeastext.version>1.0.0</lphybeastext.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +22,7 @@
 
     <modules>
         <module>beast2</module>
-        <module>lphy</module>
+<!--        <module>lphy</module>-->
         <module>lphybeast</module>
     </modules>
 
