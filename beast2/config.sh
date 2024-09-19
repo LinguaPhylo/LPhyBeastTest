@@ -2,13 +2,13 @@
 
 ## config the beast path and lib 
 
-DIR_NAME="beast276"
+DIR_NAME="beast277"
 # Export environment variables
 #export DIR_NAME
 ROOT_DIR="$HOME/LPhyBeastTest"
 
 # lphy lib
-LPHY_LIB="$ROOT_DIR/lphy-studio-1.5.0/lib"
+LPHY_LIB="$ROOT_DIR/lphy-studio-1.6.0/lib"
 
 # must define $BEAST before everything
 BEAST="$ROOT_DIR/$DIR_NAME"

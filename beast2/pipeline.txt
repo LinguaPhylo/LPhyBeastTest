@@ -6,7 +6,7 @@
 
 ## 
 
-DIR_NAME="beast276"
+DIR_NAME="beast277"
 # must define $BEAST before everything
 BEAST="$HOME/LPhyBeastTest/$DIR_NAME"
 BEAST_LIB="$BEAST/lib"
