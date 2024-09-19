@@ -18,13 +18,13 @@ and also are not engaging with the formal BEAST release framework.
 - install beast2.7.* under that folder, for example:
 
 ```bash
-tar -xvzf BEAST.v2.7.6.Linux.x86.tgz
+tar -xf BEAST.v2.7.*.Linux.x86.tgz
 ```
 
-- install lphy under this folder, for example:
+- install lphy 1.6.* under this folder, for example:
 
 ```bash
-unzip lphy-studio-1.5.0.zip
+unzip lphy-studio-1.6.*.zip
 ```
 
 - install all beast2 packages under `$BEAST_LIB`.
@@ -46,7 +46,7 @@ unzip lphy-studio-1.5.0.zip
 
 ### Setup lphybeast and create XMLs
 
-3. `rm install-pkgs.txt`, this cleans previous output.
+3. `rm install-pkgs.txt`, which contains the installation and lphybeast message.
 
 4. `sbatch install-pkgs.sl`, which installs lphybeast, LPhyBeastExt and their dependencies, then call lphybeast to saves XMLs into the subfolder `xmls`.
 
