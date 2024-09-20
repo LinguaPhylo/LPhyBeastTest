@@ -108,8 +108,8 @@ LB_ARGS="-l 10000000 -o $XML_DIR/RSV2long.xml $LPHY_SCRIPTS/RSV2.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 
-# hcv_coal : 10M
-LB_ARGS="-l 10000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy"
+# hcv_coal : 40M
+LB_ARGS="-l 40000000 -o $XML_DIR/hcv_coal.xml $LPHY_SCRIPTS/hcv_coal.lphy"
 $JAVA $MORE_ARG -Dbeast.user.package.dir="$BEAST_LIB" -Djava.library.path="$BEAST_LIB" -cp "$BEAST_LIB/launcher.jar:$LPHY_LIB/*" $APP_LB $LB_ARGS
 echo ""
 

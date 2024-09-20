@@ -16,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RSV2Test {
 
+    private final static String FILE_STEM = "RSV2long";
     private LogAnalyser logAnalyser;
 
     @BeforeEach
     void setUp() throws IOException {
         // working dir is */LPhyBeastTest/lphybeast
-        logAnalyser = new LogAnalyser("xmls/RSV2.log", TestUtils.BURNIN_PERC);
+        logAnalyser = new LogAnalyser("xmls/"+FILE_STEM+".log", TestUtils.BURNIN_PERC);
     }
 
     @Test
@@ -64,7 +65,7 @@ public class RSV2Test {
     @Test
     void testMCCTreeAndNode() {
         double mean = logAnalyser.getMean("psi.height");
-        Tree mccTree = TestUtils.assertMCCTree("xmls/RSV2.tree", mean);
+        Tree mccTree = TestUtils.assertMCCTree("xmls/"+FILE_STEM+".tree", mean);
 
         // USALongs56 is child of root
         Node usa56 = null;
