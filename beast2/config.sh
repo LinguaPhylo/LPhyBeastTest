@@ -8,7 +8,7 @@ DIR_NAME="beast277"
 ROOT_DIR="$HOME/LPhyBeastTest"
 
 # lphy lib
-LPHY_LIB="$ROOT_DIR/lphy-studio-1.6.0/lib"
+LPHY_LIB="$ROOT_DIR/lphy-studio-1.6.1/lib"
 
 # must define $BEAST before everything
 BEAST="$ROOT_DIR/$DIR_NAME"

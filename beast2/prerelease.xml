@@ -1,11 +1,7 @@
 <packages>
-	<package name="lphybeast" version="1.2.0"
-	     url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/1.2.0/lphybeast-1.2.0.zip"
-	     projectURL="https://github.com/LinguaPhylo/LPhyBeast" 
-	     description="A command-line program that takes an LPhy model specification including a data block, 
-	                  and produces a BEAST 2 XML input file.">
-		<depends on='BEAST.base' atleast='2.7.6'/>
-		<depends on='BEAST.app' atleast='2.7.6'/>
+	<package name='lphybeast' version='1.2.1'>
+		<depends on='BEAST.base' atleast='2.7.7'/>
+		<depends on='BEAST.app' atleast='2.7.7'/>
 
 		<depends on='BEASTLabs' atleast='2.0.2'/>
 		<depends on='BEAST_CLASSIC' atleast='1.6.3'/>
@@ -15,11 +11,12 @@
 		<depends on='SSM' atleast='1.2.0'
 				 description="Standard Nucleotide Substitution Models"
 				 projectURL="https://github.com/BEAST2-Dev/substmodels/"/>
-		<depends on='FastRelaxedClockLogNormal' atleast='1.2.0'/>
+		<depends on='ORC' atleast='1.2.0'/>
 		<depends on='bdtree' atleast='0.0.1'/>
 	</package>
-    
-    <package name="LPhyBeastExt" version="1.0.0"
+
+
+	<package name="LPhyBeastExt" version="1.0.0"
 	     url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/1.2.0/lphybeast-ext-1.0.0.zip"
 	     projectURL="https://github.com/LinguaPhylo/LPhyBeastExt" 
 	     description="An extension of LPhyBEAST.">
