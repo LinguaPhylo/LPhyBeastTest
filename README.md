@@ -24,7 +24,7 @@ tar -xf BEAST.v2.7.*.Linux.x86.tgz
 - install lphy 1.6.* under this folder, for example:
 
 ```bash
-unzip lphy-studio-1.6.*.zip
+unzip lphy-studio-1.6.*.zip -d lphy-studio-1.6.*
 ```
 
 - install all beast2 packages under `$BEAST_LIB`.
@@ -38,11 +38,14 @@ unzip lphy-studio-1.6.*.zip
 
 2. `cd $HOME/LPhyBeastTest` and `scp` all required files by alphabetic order into that folder:
 
-   - __beast.txt__, which is a NeSI job template for beast runs, see also `runBEAST.sh`;
    - __beauti.properties__, which points to the URL of pre-released versions;
+   - [prerelease.xml](beast2%2Fprerelease.xml), which is for Package Manager.
+   - __beast.txt__, which is a NeSI job template for beast runs, see also `runBEAST.sh`;
    - __config.sh__, which sets up required environment variables; 
    - __install-pkgs.sl__, which submit a job to install the testing version of lphybeast and LPhyBeastExt, and their dependencies; 
    - __runBEAST.sh__, which submits 4 jobs (one for each tutorial) to run beast XML, and analyses log and summarises trees.
+
+**Note:** update the versions in __prerelease.xml_ and __config.sh__ before `scp`. 
 
 ### Setup lphybeast and create XMLs
 
