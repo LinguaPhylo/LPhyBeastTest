@@ -1,6 +1,7 @@
 <packages>
+<!-- must use tag url, otherwise the package will fail to install -->
 	<package name='lphybeast' version='1.2.1'
-			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/untagged-922a38031d832b97dc50/lphybeast-1.2.1.zip"
+			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/1.2.1/lphybeast-1.2.1.zip"
 			 projectURL="https://github.com/LinguaPhylo/LPhyBeast"
 			 description="A command-line program that takes an LPhy model specification including a data block,
 	                  and produces a BEAST 2 XML input file.">
