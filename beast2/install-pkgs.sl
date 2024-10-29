@@ -15,7 +15,7 @@
 module load Java/17
 
 ### 1. load config
-
+# equal to "source". Read and execute commands from the filename argument
 . $HOME/LPhyBeastTest/config.sh
 
 echo "set BEAST = $BEAST"
