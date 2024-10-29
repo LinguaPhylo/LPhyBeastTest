@@ -54,11 +54,11 @@ unzip lphy-studio-1.6.*.zip -d lphy-studio-1.6.*
 
 4. `sbatch install-pkgs.sl`, which installs lphybeast, LPhyBeastExt and their dependencies, then call lphybeast to saves XMLs into the subfolder `xmls`.
 
-5. `ls -l xmls` or alternatively `vi install-pkgs.txt`, after the job is done.
+5. `ls lphybeast/ xmls/` to check files, or alternatively `vi install-pkgs.txt` to check messages, after the job is done.
 
 ### Run XMLs and analyse log
 
-6. run `runBEAST.sh` under $HOME/LPhyBeastTest.
+6. run `runBEAST.sh` under $HOME/LPhyBeastTest, which will submit one job for each tutorial for testing.
 
 7. after all jobs are done, transfer the entire subfolder `xmls` to the local, such as `scp -r mahuika:$HOME/LPhyBeastTest/xmls/ $LOCAL/LPhyBeastTest/lphybeast`. The subfolder should contain all beast results. 
 
