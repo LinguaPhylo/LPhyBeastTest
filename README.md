@@ -49,7 +49,8 @@ unzip lphy-studio-1.6.*.zip -d lphy-studio-1.6.*
 
 ### Setup lphybeast and create XMLs
 
-3. `rm install-pkgs.txt`, which contains the installation and lphybeast message.
+3. `rm install-pkgs.txt`, which contains the previous installation and lphybeast message. 
+`rm xmls/* lphybeast/*`, which may contain previous results.
 
 4. `sbatch install-pkgs.sl`, which installs lphybeast, LPhyBeastExt and their dependencies, then call lphybeast to saves XMLs into the subfolder `xmls`.
 
