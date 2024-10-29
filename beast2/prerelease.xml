@@ -1,5 +1,9 @@
 <packages>
-	<package name='lphybeast' version='1.2.1'>
+	<package name='lphybeast' version='1.2.1'
+			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/untagged-922a38031d832b97dc50/lphybeast-1.2.1.zip"
+			 projectURL="https://github.com/LinguaPhylo/LPhyBeast"
+			 description="A command-line program that takes an LPhy model specification including a data block,
+	                  and produces a BEAST 2 XML input file.">
 		<depends on='BEAST.base' atleast='2.7.7'/>
 		<depends on='BEAST.app' atleast='2.7.7'/>
 
