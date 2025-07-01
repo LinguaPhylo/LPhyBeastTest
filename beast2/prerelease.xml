@@ -2,7 +2,7 @@
 <!-- 			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/1.2.1/lphybeast-1.2.1.zip" -->
 <!-- must use tag url, otherwise the package will fail to install -->
 	<package name='lphybeast' version='1.3.0'
-			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/untagged-ee7e11e339fe3ed2fd55/lphybeast-1.3.0.zip"
+			 url="https://github.com/LinguaPhylo/LPhyBeast/releases/download/1.3.0pre/lphybeast-1.3.0.zip"
 			 projectURL="https://github.com/LinguaPhylo/LPhyBeast"
 			 description="A command-line program that takes an LPhy model specification including a data block,
 	                  and produces a BEAST 2 XML input file.">
