@@ -2,6 +2,10 @@
 
 Comprehensive integration tests for LPhyBeast + BEAST2 tutorials
 
+## Manual testing 
+
+[Test instruction of LPhyBeast](https://github.com/LinguaPhylo/LPhyBeast/blob/master/TestInstruction.md)
+
 ## The URLs of the pre-released versions
 
 [prerelease.xml](beast2/prerelease.xml) defines the dependencies of lphybeast and LPhyBeastExt,
